@@ -56,8 +56,10 @@ public class Sprite extends JPanel {
     public void resetSize() {
 
         if (Screen.scaleX != 1.0f || Screen.scaleY != 1.0f) {
-            int newWidth = (int) (defaultWidth * Screen.scaleX);
-            int newHeight = (int) (defaultHeight * Screen.scaleY);
+
+            float minScale = Math.min(Screen.scaleX, Screen.scaleY);
+            int newWidth = (int) (defaultWidth * minScale);
+            int newHeight = (int) (defaultHeight * minScale);
     
             Image tempImage = defaultImage.getScaledInstance(newWidth, newHeight, Image.SCALE_DEFAULT);
             BufferedImage newImage = new BufferedImage(newWidth, newHeight, defaultImage.getType());

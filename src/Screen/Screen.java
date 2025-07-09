@@ -69,6 +69,10 @@ public class Screen extends JFrame implements KeyListener, ComponentListener {
         cardLayout.show(cards, "");
     }
 
+    public static Card getCard() {
+        return card;
+    }
+
     public void keyPressed(KeyEvent e) {
         if (e.getKeyChar() == 'q') {
             System.exit(0);
