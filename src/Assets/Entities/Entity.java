@@ -1,30 +1,46 @@
 package Assets.Entities;
 
 import Assets.*;
-import java.awt.event.*;
+import Assets.Battle.*;
+import Assets.Moves.*;
 
+import java.awt.event.*;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
+import javax.swing.Timer;
+
 import Screen.*;
+import UI.*;
 
 public class Entity extends Sprite implements MouseListener, Selectable {
     
+    private static final int TIME_TOOLTIP = 200;
+
     private String name;
     private Map<String, Integer> stats;
     private boolean selectable;
-    //private List<Move> moves;
-    //private TargetBorder target;
+    private List<Move> moves;
+    private TargetBorder target;
+    private Timer toolTipTimer;
 
     public Entity(String file, String name, int health, int maxHealth, int attack, int magic,
                     int defense, int speed) {
         super(file);
         this.name = name;
         stats = new HashMap<>();
+        moves = new ArrayList<>();
+        toolTipTimer = new Timer(TIME_TOOLTIP, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Screen.getCard().addToolTip(getToolTip());
+            }
+        });
+        toolTipTimer.setRepeats(false);
+
         //Delete later;
-        setSelectable(true);
+        setSelectable(false);
 
         stats.put("health", health);
         stats.put("maxHealth", maxHealth);
@@ -47,7 +63,6 @@ public class Entity extends Sprite implements MouseListener, Selectable {
 
     public void setSelected(boolean selected) {
         if (selected) {
-            Screen.getCard().resetSelection();
             Screen.getCard().setSelection(this);
         }
 
@@ -74,7 +89,8 @@ public class Entity extends Sprite implements MouseListener, Selectable {
 
     public void mouseEntered(MouseEvent e) {
         if (e != null) {
-
+            toolTipTimer.restart();
+            toolTipTimer.start();
         }
 
         if (!interactable(e)) {
@@ -86,7 +102,8 @@ public class Entity extends Sprite implements MouseListener, Selectable {
 
     public void mouseExited(MouseEvent e) {
         if (e != null) {
-            
+            toolTipTimer.stop();
+            Screen.getCard().removeToolTip();
         }
 
         if (!interactable(e)) {
@@ -97,13 +114,98 @@ public class Entity extends Sprite implements MouseListener, Selectable {
     }
 
     private boolean interactable(MouseEvent e) {
-        if (!selectable || Screen.getCard().getSelection() == this) {
+
+        if (TurnManager.isEnemyTurn() && e == null) {
+            return true;
+        }
+
+        if (!selectable || Screen.getCard().getSelection() == this || TurnManager.isEnemyTurn()) {
             return false;
         }
 
 
 
         return true;
+    }
+
+    public void assignDamage(int damage, int type) {
+
+        String usedModifier;
+
+        switch(type) {
+
+            case 0:
+                usedModifier = "defense";
+                break;
+
+            case 1:
+                usedModifier = "magic";
+                break;
+
+            case 2:
+                usedModifier = "speed";
+                break;
+
+            default:
+                usedModifier = "";
+                break;
+        }
+
+        int actualDamage;
+
+        if (usedModifier.equals("")) {
+            actualDamage = damage;
+        }
+
+        else {
+            actualDamage = damage - stats.get(usedModifier);
+        }
+
+        if (actualDamage <= 0) {
+            actualDamage = 1;
+        }
+
+        stats.put("health", stats.get("health") - actualDamage);
+
+        if (stats.get("health") <= 0) {
+            Battle.removeEntity(this);
+        }
+
+    }
+
+    public void addAttackTarget() {
+        target = new TargetBorderAttack(this);
+        addCenter(target);
+    }
+
+    public void removeTarget() {
+        if (target == null) {
+            throw new IllegalArgumentException("Attempted to remove target that does not exist");
+        }
+
+        remove(target);
+        target = null;
+        repaint();
+    }
+
+    public TargetBorder getTarget() {
+        return target;
+    }
+
+    public Map<String, Integer> getStats() {
+        return stats;
+    }
+    
+    public void addMove(Move move) {
+        moves.add(move);
+    }
+
+    public List<Move> getMoves() {
+        return moves;
+    }
+
+    public ToolTip getToolTip() {
+        return new ToolTip(this.toString());
     }
 
     public String toString() {

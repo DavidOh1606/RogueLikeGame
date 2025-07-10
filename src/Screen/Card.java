@@ -5,6 +5,8 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import Assets.*;
+import UI.*;
+
 
 public class Card extends JPanel implements MouseListener{
 
@@ -23,10 +25,14 @@ public class Card extends JPanel implements MouseListener{
     private JPanel menuLayer;
     private JPanel toolTipLayer;
 
+    private ToolTip toolTip;
+
 
     public Card() {
+        Sprite.clearSprites();
         type = 0;
         selection = null;
+        toolTip = null;
         setOpaque(false);
         setLayout(null);
 
@@ -41,6 +47,8 @@ public class Card extends JPanel implements MouseListener{
 
         menuLayer.setOpaque(false);
         toolTipLayer.setOpaque(false);
+
+        toolTipLayer.setLayout(null);
             
         layers.add(background, JLayeredPane.DEFAULT_LAYER);
         layers.add(menuLayer, JLayeredPane.PALETTE_LAYER);
@@ -74,6 +82,10 @@ public class Card extends JPanel implements MouseListener{
     // do when a selection is made
     public void setSelection(Selectable selection) {
         this.selection = selection;
+
+        if (selection instanceof SelectableButton) {
+            return;
+        }
     }
 
     public Selectable getSelection() {
@@ -83,6 +95,24 @@ public class Card extends JPanel implements MouseListener{
     // Should be overriden by each card
     public void resetSelection() {
         this.selection = null;
+    }
+
+    public void addToolTip(ToolTip toolTip) {
+        removeToolTip();
+        this.toolTip = toolTip;
+        toolTipLayer.add(toolTip);
+
+        revalidate();
+        repaint();
+    }
+
+    public void removeToolTip() {
+        if (toolTip == null) {
+            return;
+        }
+
+        toolTipLayer.remove(toolTip);
+        repaint();
     }
 
     public int getType() {

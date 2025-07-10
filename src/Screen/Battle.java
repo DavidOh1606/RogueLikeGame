@@ -23,7 +23,9 @@ public class Battle extends Card {
 
     private MoveManager moveManager;
 
-    public Battle() {
+    public Battle(List<Entity> heros, List<Entity> enemies) {
+
+
         JPanel background = getBg();
         background.setLayout(new BoxLayout(background, BoxLayout.X_AXIS));
 
@@ -35,9 +37,6 @@ public class Battle extends Card {
         // ** hero panel
         JPanel heroPanel = new JPanel();
         heroPanel.setOpaque(false);
-
-        List<Entity> heros = new ArrayList<>();
-        heros.add(new Knight());
 
         heroEntities = new BattleEntityPanel(heros);
         heroPanel.add(heroEntities);
@@ -67,9 +66,6 @@ public class Battle extends Card {
         JPanel enemyPanel = new JPanel();
         enemyPanel.setOpaque(false);
 
-        List<Entity> enemies = new ArrayList<>();
-        enemies.add(new Skeleton());
-
         enemyEntities = new BattleEntityPanel(enemies);
 
         enemyPanel.add(enemyEntities);
@@ -86,16 +82,23 @@ public class Battle extends Card {
     }
 
     public void setSelection(Selectable selection) {
-        
+        resetSelection();
         
         super.setSelection(selection);
 
-        entityText.setEntity((Entity) selection);
+        Entity c = (Entity) selection;
+
+        entityText.setEntity(c);
+        moveManager.add(c.getMoves());
 
     }    
 
     public void resetSelection() {
-        Entity entity = (Entity) getSelection();
+        Selectable tempSelection = getSelection();
+        super.resetSelection();
+
+
+        Entity entity = (Entity) tempSelection;
 
         if (entity == null) {
             return;
@@ -104,11 +107,20 @@ public class Battle extends Card {
         entity.setAlpha(1.0f);
 
         entityText.clear();
-        super.resetSelection();
+        moveManager.clear();
     }
 
-    
+    public static MoveManager getMoveManager() {
+        return getBattle().moveManager;
+    }
 
+    public static List<Entity> getHeros() {
+        return getBattle().heroEntities.getEntities();
+    }
+
+    public static List<Entity> getEnemies() {
+        return getBattle().enemyEntities.getEntities();
+    }
 
     private static Battle getBattle() {
         Card card = Screen.getCard();
@@ -118,5 +130,21 @@ public class Battle extends Card {
         }
 
         return (Battle) card;
+    }
+
+    public static void removeEntity(Entity entity) {
+        Battle battle = getBattle();
+
+        if (Battle.getHeros().contains(entity)) {
+            battle.heroEntities.removeEntity(entity);
+        }
+
+        else {
+            battle.enemyEntities.removeEntity(entity);
+
+        }
+
+        TurnManager.removeEntity(entity);
+        battle.repaint();
     }
 }

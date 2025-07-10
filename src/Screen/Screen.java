@@ -98,7 +98,7 @@ public class Screen extends JFrame implements KeyListener, ComponentListener {
     public void componentResized(ComponentEvent e) {
 
         resetScreenSize();
-        Sprite.resetSpriteSizes(); 
+        Sprite.resetSpriteSizes();
         card.resetSize();
     }
 

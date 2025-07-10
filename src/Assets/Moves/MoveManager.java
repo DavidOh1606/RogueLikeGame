@@ -25,6 +25,9 @@ public class MoveManager extends Sprite {
         for (Move move : moves) {
             super.add(move);
         }
+
+        revalidate();
+        repaint();
     }
 
     public void clear() {
@@ -47,6 +50,8 @@ public class MoveManager extends Sprite {
         selection = null;
     }
     public void setSelection(Move selection) {
+        resetSelection();
+
         this.selection = selection;
     }
 

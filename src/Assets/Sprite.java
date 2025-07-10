@@ -108,4 +108,15 @@ public class Sprite extends JPanel {
         defaultHeight = height;
     }
 
+    public void addCenter(JComponent component) {
+        add(component);
+        setComponentZOrder(component, 0);
+
+        component.setBounds(0, 0, image.getWidth(), image.getHeight());
+        repaint();
+    }
+
+    public static void clearSprites() {
+        sprites.clear();
+    }
 }

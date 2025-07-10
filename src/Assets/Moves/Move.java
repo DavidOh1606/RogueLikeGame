@@ -2,16 +2,20 @@ package Assets.Moves;
 
 import Assets.*;
 import Assets.Entities.*;
+import Assets.Battle.*;
 
 import java.awt.event.*;
 import javax.swing.*;
 
 import Screen.*;
 
+
 public abstract class Move extends Sprite implements MouseListener, Selectable {
     
     private String name;
     private boolean selectable;
+    private int uses;
+    private int maxUses;
 
     public Move(String file, String name) {
         super(file);
@@ -28,12 +32,22 @@ public abstract class Move extends Sprite implements MouseListener, Selectable {
 
     public void setSelected(boolean selected) {
         if (selected) {
-
+            Battle.getMoveManager().setSelection(this);
+            displayOptions();
         }
 
         else {
-
+            resetOptions();
+            setAlpha(1.0f);
         }
+    }
+
+    public void setSelectable(boolean selectable) {
+        this.selectable = selectable;
+    }
+
+    public boolean getSelectable() {
+        return selectable;
     }
 
     public void mousePressed(MouseEvent e) {
@@ -41,7 +55,7 @@ public abstract class Move extends Sprite implements MouseListener, Selectable {
             return;
         }
 
-
+        setSelected(true);
     }
 
     public void mouseClicked(MouseEvent e) {
@@ -70,7 +84,12 @@ public abstract class Move extends Sprite implements MouseListener, Selectable {
     }
 
     private boolean interactable(MouseEvent e) {
-        if (!selectable) {
+
+        if (TurnManager.isEnemyTurn() && e == null) {
+            return true;
+        }
+
+        if (!selectable || TurnManager.isEnemyTurn() ||Battle.getMoveManager().getSelection() == this) {
             return false;
         }
 

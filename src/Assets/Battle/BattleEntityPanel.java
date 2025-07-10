@@ -21,4 +21,15 @@ public class BattleEntityPanel extends Sprite {
     public List<Entity> getEntities() {
         return entities;
     }
+
+    public void removeEntity(Entity entity) {
+        if (!entities.contains(entity)) {
+            throw new IllegalArgumentException("Entity not found");
+        }
+
+        remove(entity);
+        entities.remove(entity);
+        revalidate();
+        repaint();
+    }
 }
