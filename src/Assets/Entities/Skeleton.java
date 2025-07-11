@@ -5,7 +5,7 @@ public class Skeleton extends Enemy {
 
     public Skeleton() {
         super(FILE, "skeleton", 10, 10, 8, 6, 4, 6);
-    }
 
+    }
 
 }

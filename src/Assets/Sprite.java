@@ -32,7 +32,7 @@ public class Sprite extends JPanel {
 
         setOpaque(false);
         setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
-        sprites.add(this);
+        addToResize();
     }
 
     public void setImage(String file) {
@@ -109,11 +109,20 @@ public class Sprite extends JPanel {
     }
 
     public void addCenter(JComponent component) {
+
         add(component);
         setComponentZOrder(component, 0);
+        int width = (int) component.getPreferredSize().getWidth();
+        int height = (int) component.getPreferredSize().getHeight();
 
-        component.setBounds(0, 0, image.getWidth(), image.getHeight());
+        component.setBounds(0, 0, width, height);
+
+        revalidate();
         repaint();
+    }
+
+    public void addToResize() {
+        sprites.add(this);
     }
 
     public static void clearSprites() {

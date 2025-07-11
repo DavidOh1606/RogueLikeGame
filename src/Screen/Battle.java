@@ -22,6 +22,8 @@ public class Battle extends Card {
     private BattleEntityText entityText;
 
     private MoveManager moveManager;
+    private MoveTextPanel moveText;
+
 
     public Battle(List<Entity> heros, List<Entity> enemies) {
 
@@ -72,13 +74,22 @@ public class Battle extends Card {
 
 
         // ** move text panel
+        JPanel moveTextPanel = new JPanel();
+        moveTextPanel.setOpaque(false);
+
+        moveText = new MoveTextPanel();
+
+        moveTextPanel.add(moveText);
 
         // Adding all panels to right panel
         rightPanel.add(enemyPanel);
+        rightPanel.add(moveTextPanel);
 
         // Adding all panels to background
         background.add(leftPanel);
         background.add(rightPanel);
+
+        TurnManager.init(heros, enemies); 
     }
 
     public void setSelection(Selectable selection) {
@@ -90,6 +101,7 @@ public class Battle extends Card {
 
         entityText.setEntity(c);
         moveManager.add(c.getMoves());
+        moveText.setUser(c.getName());
 
     }    
 
@@ -108,10 +120,15 @@ public class Battle extends Card {
 
         entityText.clear();
         moveManager.clear();
+        moveText.resetUser();
     }
 
     public static MoveManager getMoveManager() {
         return getBattle().moveManager;
+    }
+
+    public static MoveTextPanel getMoveText() {
+        return getBattle().moveText;
     }
 
     public static List<Entity> getHeros() {

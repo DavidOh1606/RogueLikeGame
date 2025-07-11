@@ -1,6 +1,8 @@
 package Assets.Battle;
 
 import java.awt.event.*;
+import java.awt.*;
+import javax.swing.*;
 
 import Assets.*;
 import Assets.Moves.*;
@@ -16,6 +18,7 @@ public class TargetBorder extends Sprite implements MouseListener {
 
         this.target = target;
         addMouseListener(this);
+        resetSize();
     }
 
     public void mousePressed(MouseEvent e) {
@@ -63,4 +66,14 @@ public class TargetBorder extends Sprite implements MouseListener {
 
         return true;
     }
+
+    public void resetSize() {
+        super.resetSize();
+
+        int width = (int) getPreferredSize().getWidth();
+        int height = (int) getPreferredSize().getHeight();
+
+        setBounds(0, 0, width, height);
+    }
+
 }

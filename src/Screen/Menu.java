@@ -23,8 +23,8 @@ public class Menu extends Card {
         // Title
         JPanel titlePanel = new JPanel();
 
-        JLabel titleText = new JLabel(Screen.TITLE);
-        titleText.setFont(new Font(TITLE_FONT, Font.PLAIN, TITLE_FONT_SIZE)); 
+        TextLabel titleText = new TextLabel(Screen.TITLE);
+        titleText.setFontSize("TITLE"); 
 
         titlePanel.setOpaque(false);
         titlePanel.add(titleText);

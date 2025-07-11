@@ -6,11 +6,13 @@ import javax.swing.*;
 import Assets.*;
 import Assets.Entities.Entity;
 
+import UI.TextLabel;
+
 public class BattleEntityText extends Sprite {
 
     private static final String FILE = "src/Images/Battle/battle_character_text.png";
     
-    private JLabel text;
+    private TextLabel text;
 
     public BattleEntityText() {
         super(FILE);
@@ -18,7 +20,7 @@ public class BattleEntityText extends Sprite {
         JPanel panel = new JPanel();
 
         panel.setOpaque(false);
-        text = new JLabel();
+        text = new TextLabel();
         panel.add(text);
         add(panel);
     }

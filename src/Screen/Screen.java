@@ -5,6 +5,9 @@ import javax.swing.*;
 import java.awt.event.*;
 
 import Assets.Sprite;
+import Assets.Entities.Entity;
+
+import UI.*;
 
 public class Screen extends JFrame implements KeyListener, ComponentListener {
 
@@ -39,8 +42,8 @@ public class Screen extends JFrame implements KeyListener, ComponentListener {
         cardLayout = new CardLayout();
         cards.setLayout(cardLayout);
         add(cards);
-        JPanel menu = new Menu();
-        card = (Card) menu;
+        Card menu = new Menu();
+        card = menu;
         cards.add(menu, "");
         cardLayout.show(cards, "");
         setVisible(true);
@@ -99,6 +102,8 @@ public class Screen extends JFrame implements KeyListener, ComponentListener {
 
         resetScreenSize();
         Sprite.resetSpriteSizes();
+        TextLabel.resetTextLabels();
+        Entity.resetEntitySizes();
         card.resetSize();
     }
 

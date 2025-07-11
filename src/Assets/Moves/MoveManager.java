@@ -6,6 +6,9 @@ import java.awt.*;
 import javax.swing.*;
 
 import Assets.*;
+import Assets.Battle.*;
+import Screen.Battle;
+
 
 public class MoveManager extends Sprite {
     private static final String FILE = "src/Images/Battle/moveManager.png";
@@ -48,11 +51,15 @@ public class MoveManager extends Sprite {
 
         selection.setSelected(false);
         selection = null;
+
+        Battle.getMoveText().resetMove();
     }
     public void setSelection(Move selection) {
         resetSelection();
 
         this.selection = selection;
+
+        Battle.getMoveText().setMove(selection.getName());
     }
 
     public Move getSelection() {

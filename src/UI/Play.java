@@ -26,6 +26,5 @@ public class Play extends Button {
         enemies.add(new Skeleton());
 
         Screen.switchCard(new Battle(heros, enemies));
-        TurnManager.init(heros, enemies);
     }
 }

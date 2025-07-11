@@ -10,13 +10,13 @@ public abstract class Button extends Sprite implements MouseListener{
     private static final String FILE = "src/Images/UI/button.png";
 
 
-    private JLabel textLabel;
+    private TextLabel textLabel;
     private String text;
 
     public Button(String text) {
         super(FILE);
 
-        textLabel = new JLabel();
+        textLabel = new TextLabel();
         add(textLabel);
         this.text = text;
         textLabel.setText(this.text);

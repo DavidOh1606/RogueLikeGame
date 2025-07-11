@@ -89,13 +89,15 @@ public abstract class Move extends Sprite implements MouseListener, Selectable {
             return true;
         }
 
-        if (!selectable || TurnManager.isEnemyTurn() ||Battle.getMoveManager().getSelection() == this) {
+        if (!selectable || TurnManager.isEnemyTurn() || Battle.getMoveManager().getSelection() == this) {
             return false;
         }
 
         return true;
     }
 
-
+    public String getName() {
+        return name;
+    }
 
 }

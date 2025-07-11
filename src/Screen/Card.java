@@ -30,6 +30,7 @@ public class Card extends JPanel implements MouseListener{
 
     public Card() {
         Sprite.clearSprites();
+        TextLabel.clearTextLabels();
         type = 0;
         selection = null;
         toolTip = null;
@@ -58,7 +59,6 @@ public class Card extends JPanel implements MouseListener{
 
         resetSize();
 
-        // 
         addMouseListener(this);
     }
 
@@ -129,7 +129,10 @@ public class Card extends JPanel implements MouseListener{
         }
 
         resetSelection();
+    }
 
+    public JPanel getMenuLayer() {
+        return menuLayer;
     }
     public void mouseClicked(MouseEvent e) {
 

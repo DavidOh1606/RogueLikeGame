@@ -16,4 +16,8 @@ public class Hero extends Entity {
         this(file, name, stats.get("health"), stats.get("maxHealth"), stats.get("attack"), stats.get("magic"),
                 stats.get("defense"), stats.get("speed"));
     }
+
+    public void equipItem() {
+
+    }
 }

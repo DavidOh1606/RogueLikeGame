@@ -17,7 +17,6 @@ import UI.*;
 
 public class Entity extends Sprite implements MouseListener, Selectable {
     
-    private static final int TIME_TOOLTIP = 200;
 
     private String name;
     private Map<String, Integer> stats;
@@ -26,13 +25,15 @@ public class Entity extends Sprite implements MouseListener, Selectable {
     private TargetBorder target;
     private Timer toolTipTimer;
 
+    private static List<Entity> entities = new ArrayList<>();;
+
     public Entity(String file, String name, int health, int maxHealth, int attack, int magic,
                     int defense, int speed) {
         super(file);
         this.name = name;
         stats = new HashMap<>();
         moves = new ArrayList<>();
-        toolTipTimer = new Timer(TIME_TOOLTIP, new ActionListener() {
+        toolTipTimer = new Timer(ToolTip.DELAY, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Screen.getCard().addToolTip(getToolTip());
             }
@@ -192,6 +193,14 @@ public class Entity extends Sprite implements MouseListener, Selectable {
         return target;
     }
 
+    public void resetSize() {
+        super.resetSize();
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public Map<String, Integer> getStats() {
         return stats;
     }
@@ -219,5 +228,19 @@ public class Entity extends Sprite implements MouseListener, Selectable {
         text += "</html>";
 
         return text;
+    }
+
+    public void addToResize() {
+        entities.add(this);
+    }
+
+    public static void clearEntities() {
+        entities.clear();
+    }
+
+    public static void resetEntitySizes() {
+        for (Entity entity : entities) {
+            entity.resetSize();
+        }
     }
 }

@@ -8,9 +8,12 @@ import Assets.*;
 import Screen.*;
 
 public class ToolTip extends Sprite {
+
+    public static final int DELAY = 300;
+
     private static final String FILE = "src/Images/UI/tooltip.png";
 
-    private JLabel textLabel;
+    private TextLabel textLabel;
 
     public ToolTip(String text) {
         super(FILE);
@@ -23,7 +26,7 @@ public class ToolTip extends Sprite {
             int height = (int) getPreferredSize().getHeight();
 
             setBounds(x, y, width, height);
-            textLabel = new JLabel(text);
+            textLabel = new TextLabel(text);
             add(textLabel);
 
             revalidate();
