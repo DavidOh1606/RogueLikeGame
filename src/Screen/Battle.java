@@ -27,7 +27,7 @@ public class Battle extends Card {
 
     public Battle(List<Entity> heros, List<Entity> enemies) {
 
-
+        
         JPanel background = getBg();
         background.setLayout(new BoxLayout(background, BoxLayout.X_AXIS));
 
@@ -89,7 +89,7 @@ public class Battle extends Card {
         background.add(leftPanel);
         background.add(rightPanel);
 
-        TurnManager.init(heros, enemies); 
+        TurnManager.init(heros, enemies);
     }
 
     public void setSelection(Selectable selection) {
@@ -97,11 +97,16 @@ public class Battle extends Card {
         
         super.setSelection(selection);
 
+        if (!(selection instanceof Entity)) {
+            return;
+        }
+
         Entity c = (Entity) selection;
 
         entityText.setEntity(c);
         moveManager.add(c.getMoves());
         moveText.setUser(c.getName());
+
 
     }    
 
@@ -109,14 +114,13 @@ public class Battle extends Card {
         Selectable tempSelection = getSelection();
         super.resetSelection();
 
-
-        Entity entity = (Entity) tempSelection;
-
-        if (entity == null) {
+        if (!(tempSelection instanceof Entity)) {
             return;
         }
 
-        entity.setAlpha(1.0f);
+        Entity entity = (Entity) tempSelection;
+
+        entity.setSelected(false);
 
         entityText.clear();
         moveManager.clear();

@@ -82,10 +82,6 @@ public class Card extends JPanel implements MouseListener{
     // do when a selection is made
     public void setSelection(Selectable selection) {
         this.selection = selection;
-
-        if (selection instanceof SelectableButton) {
-            return;
-        }
     }
 
     public Selectable getSelection() {

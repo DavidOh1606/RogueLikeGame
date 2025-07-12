@@ -15,6 +15,7 @@ public class Play extends Button {
     }
 
     public void action() {
+        
 
         List<Entity> heros = new ArrayList<>();
         List<Entity> enemies = new ArrayList<>();

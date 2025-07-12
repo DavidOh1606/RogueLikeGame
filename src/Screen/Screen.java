@@ -7,6 +7,8 @@ import java.awt.event.*;
 import Assets.Sprite;
 import Assets.Entities.Entity;
 
+import java.util.ArrayList;
+
 import UI.*;
 
 public class Screen extends JFrame implements KeyListener, ComponentListener {
@@ -42,9 +44,8 @@ public class Screen extends JFrame implements KeyListener, ComponentListener {
         cardLayout = new CardLayout();
         cards.setLayout(cardLayout);
         add(cards);
-        Card menu = new Menu();
-        card = menu;
-        cards.add(menu, "");
+        card = new Menu();
+        cards.add(card, "");
         cardLayout.show(cards, "");
         setVisible(true);
 

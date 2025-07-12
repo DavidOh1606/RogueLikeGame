@@ -133,24 +133,22 @@ public class Entity extends Sprite implements MouseListener, Selectable {
 
         String usedModifier;
 
-        switch(type) {
-
-            case 0:
-                usedModifier = "defense";
-                break;
-
-            case 1:
-                usedModifier = "magic";
-                break;
-
-            case 2:
-                usedModifier = "speed";
-                break;
-
-            default:
-                usedModifier = "";
-                break;
+        if (type == 0) {
+            usedModifier = "defense";
         }
+
+        else if (type == 1) {
+            usedModifier = "magic";
+        }
+
+        else if (type == 2) {
+            usedModifier = "speed";
+        }
+
+        else {
+            usedModifier = "";
+        }
+
 
         int actualDamage;
 
