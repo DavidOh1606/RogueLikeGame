@@ -44,7 +44,9 @@ public class Screen extends JFrame implements KeyListener, ComponentListener {
         cardLayout = new CardLayout();
         cards.setLayout(cardLayout);
         add(cards);
-        card = new Menu();
+        //card = new Menu();
+        card = new Testing();
+        
         cards.add(card, "");
         cardLayout.show(cards, "");
         setVisible(true);
@@ -104,7 +106,6 @@ public class Screen extends JFrame implements KeyListener, ComponentListener {
         resetScreenSize();
         Sprite.resetSpriteSizes();
         TextLabel.resetTextLabels();
-        Entity.resetEntitySizes();
         card.resetSize();
     }
 

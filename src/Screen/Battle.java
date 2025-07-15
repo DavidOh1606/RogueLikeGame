@@ -6,13 +6,15 @@ import Assets.Battle.*;
 import Assets.Moves.*;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
+
 
 import java.util.List;
 import java.util.ArrayList;
 
 
-public class Battle extends Card {
+public class Battle extends GameCard {
     
 
 
@@ -23,7 +25,6 @@ public class Battle extends Card {
 
     private MoveManager moveManager;
     private MoveTextPanel moveText;
-
 
     public Battle(List<Entity> heros, List<Entity> enemies) {
 
@@ -111,6 +112,11 @@ public class Battle extends Card {
     }    
 
     public void resetSelection() {
+
+        if (TurnManager.isEnemyTurn()) {
+            return;
+        }
+
         Selectable tempSelection = getSelection();
         super.resetSelection();
 
@@ -143,16 +149,6 @@ public class Battle extends Card {
         return getBattle().enemyEntities.getEntities();
     }
 
-    private static Battle getBattle() {
-        Card card = Screen.getCard();
-
-        if (!(card instanceof Battle)) {
-            throw new IllegalStateException("Not a battle");
-        }
-
-        return (Battle) card;
-    }
-
     public static void removeEntity(Entity entity) {
         Battle battle = getBattle();
 
@@ -168,4 +164,23 @@ public class Battle extends Card {
         TurnManager.removeEntity(entity);
         battle.repaint();
     }
+
+     private static Battle getBattle() {
+        Card card = Screen.getCard();
+
+        if (!(card instanceof Battle)) {
+            throw new IllegalStateException("Not a battle");
+        }
+
+        return (Battle) card;
+    }
+
+    public boolean interactable(MouseEvent e) {
+        if (TurnManager.isEnemyTurn() && e == null) {
+            return true;
+        }
+        
+        return super.interactable(e);
+    }
+
 }

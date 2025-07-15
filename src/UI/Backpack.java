@@ -6,4 +6,12 @@ public class Backpack extends GameButton {
     public Backpack() {
         super(FILE);
     }
+
+    public void use() {
+
+    }
+
+    public void reset() {
+        
+    }
 }

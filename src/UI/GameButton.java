@@ -7,16 +7,20 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class GameButton extends Sprite implements MouseListener, Selectable {
+public abstract class GameButton extends Sprite implements MouseListener, Selectable {
 
 
 
     private boolean selectable;
 
+
     public GameButton(String file) {
         super(file);
         selectable = true;
         addMouseListener(this);
+
+
+
     }
 
     public void setSelectable(boolean selectable) {
@@ -25,13 +29,19 @@ public class GameButton extends Sprite implements MouseListener, Selectable {
 
     public void setSelected(boolean selected) {
         if (selected) {
-            Screen.getCard().setSelection(this);
+            GameCard game = (GameCard) Screen.getCard();
+            game.setButtonSelection(this);
+            use();
         }
 
         else {
             setAlpha(1.0f);
+            reset();
         }
     }
+
+    public abstract void use();
+    public abstract void reset();
 
     public boolean getSelectable() {
         return selectable;

@@ -3,6 +3,8 @@ package Assets.Battle;
 import java.awt.event.*;
 import javax.swing.Timer;
 
+import Screen.Screen;
+
 public class EnemyPlayer {
     private static final int TIME_PER_MOVE = 400;
 
@@ -68,5 +70,6 @@ public class EnemyPlayer {
 
     public void makeMove() {
         bestMove.target.getTarget().mousePressed(null);
+        Screen.getCard().resetSelection();
     }
 }

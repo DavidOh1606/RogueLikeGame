@@ -17,6 +17,8 @@ public class Card extends JPanel implements MouseListener{
 
     private Selectable selection;
 
+    private boolean focused;
+
     // JLayeredPane in order to have different layers on the screen
     private JLayeredPane layers;
 
@@ -24,7 +26,6 @@ public class Card extends JPanel implements MouseListener{
     private JPanel background;
     private JPanel menuLayer;
     private JPanel toolTipLayer;
-
     private ToolTip toolTip;
 
 
@@ -34,6 +35,7 @@ public class Card extends JPanel implements MouseListener{
         type = 0;
         selection = null;
         toolTip = null;
+        focused = true;
         setOpaque(false);
         setLayout(null);
 
@@ -119,6 +121,10 @@ public class Card extends JPanel implements MouseListener{
         this.type = type;
     }
 
+    public void setFocused(boolean focused) {
+        this.focused = focused;
+    }
+
     public void mousePressed(MouseEvent e) {
         if (!interactable(e)) {
             return;
@@ -149,7 +155,7 @@ public class Card extends JPanel implements MouseListener{
     // Should be overriden once again.
     public boolean interactable(MouseEvent e) {
 
-        if (selection == null) {
+        if (selection == null || !focused) {
             return false;
         }
 

@@ -23,12 +23,15 @@ public class Sprite extends JPanel {
     private BufferedImage image;
     private float alpha;
 
+    private boolean remove;
+
     private static List<Sprite> sprites = new ArrayList<>();;
 
     public Sprite(String file) {
         setImage(file);
 
         alpha = 1.0f;
+        remove = true;
 
         setOpaque(false);
         setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
@@ -125,7 +128,24 @@ public class Sprite extends JPanel {
         sprites.add(this);
     }
 
+    public boolean getRemove() {
+        return remove;
+    }
+    
+    public void setRemove(boolean remove) {
+        this.remove = remove;
+    }
+
     public static void clearSprites() {
-        sprites.clear();
+
+        for (int i = 0; i < sprites.size(); i++) {
+            Sprite sprite = sprites.get(i);
+            
+            if (sprite.getRemove()) {
+                sprites.remove(sprite);
+                i--;
+            }
+
+        }
     }
 }

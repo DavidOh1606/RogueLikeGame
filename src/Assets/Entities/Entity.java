@@ -25,8 +25,6 @@ public class Entity extends Sprite implements MouseListener, Selectable {
     private TargetBorder target;
     private Timer toolTipTimer;
 
-    private static List<Entity> entities = new ArrayList<>();;
-
     public Entity(String file, String name, int health, int maxHealth, int attack, int magic,
                     int defense, int speed) {
         super(file);
@@ -40,7 +38,7 @@ public class Entity extends Sprite implements MouseListener, Selectable {
         });
         toolTipTimer.setRepeats(false);
 
-        //Delete later;
+        setRemove(false);
         setSelectable(false);
 
         stats.put("health", health);
@@ -228,17 +226,5 @@ public class Entity extends Sprite implements MouseListener, Selectable {
         return text;
     }
 
-    public void addToResize() {
-        entities.add(this);
-    }
 
-    public static void clearEntities() {
-        entities.clear();
-    }
-
-    public static void resetEntitySizes() {
-        for (Entity entity : entities) {
-            entity.resetSize();
-        }
-    }
 }
