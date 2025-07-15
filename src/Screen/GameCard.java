@@ -66,6 +66,10 @@ public class GameCard extends Card {
         button.setSelected(false);
     }
 
+    public Selectable getButtonSelection() {
+        return buttonSelection;
+    }
+
 
     public JPanel getCenterPanel() {
         return centerPanel;

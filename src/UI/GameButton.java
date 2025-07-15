@@ -81,7 +81,7 @@ public abstract class GameButton extends Sprite implements MouseListener, Select
     }
 
     public boolean interactable(MouseEvent e) {
-        if (!selectable || Screen.getCard().getSelection() == this) {
+        if (!selectable || GameCard.getGameCard().getButtonSelection() == this) {
             return false;
         }
 

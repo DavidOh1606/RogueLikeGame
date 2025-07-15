@@ -1,21 +1,18 @@
 package Assets.Items;
 
 import Assets.*;
-
 import java.awt.event.*;
-import java.awt.*;
-import javax.swing.*;
 
-public class Item extends Sprite implements MouseListener {
+public class ItemSlot extends Sprite implements MouseListener {
+    private static final String FILE = "src/Images/Items/itemslot.png";
 
-    public Item(String file, String name) {
-        super(file);
+    private Item item;
 
-        setRemove(false);
+    public ItemSlot() {
+        super(FILE);
+        item = null;
 
-        addMouseListener(this);
     }
-
 
     public void mousePressed(MouseEvent e) {
 
@@ -36,4 +33,5 @@ public class Item extends Sprite implements MouseListener {
     public void mouseExited(MouseEvent e) {
 
     }
+
 }
