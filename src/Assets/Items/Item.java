@@ -4,6 +4,8 @@ import Assets.*;
 
 import Screen.*;
 
+import UI.*;
+
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
@@ -16,15 +18,26 @@ public class Item extends Sprite implements MouseListener, Selectable {
     private boolean selectable;
 
     private Map<String, Integer> itemStats;
+    private String name;
+
+    private Timer toolTipTimer;
 
     public Item(String file, String name) {
         super(file);
+        this.name = name;
 
         itemStats = new HashMap<>();
 
         // Change to false eventually;
         setSelectable(true);
         setRemove(false);
+
+        toolTipTimer = new Timer(ToolTip.DELAY, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Screen.getCard().addToolTip(getToolTip());
+            }
+        });
+        toolTipTimer.setRepeats(false);
 
         addMouseListener(this);
     }
@@ -72,6 +85,11 @@ public class Item extends Sprite implements MouseListener, Selectable {
     }
 
     public void mouseEntered(MouseEvent e) {
+        if (e != null) {
+            toolTipTimer.restart();
+            toolTipTimer.start();
+        }
+
         if (!interactable(e)) {
             return;
         }
@@ -81,6 +99,11 @@ public class Item extends Sprite implements MouseListener, Selectable {
     }
 
     public void mouseExited(MouseEvent e) {
+        if (e != null) {
+            toolTipTimer.stop();
+            Screen.getCard().removeToolTip();
+        }
+        
         if (!interactable(e)) {
             return;
         }
@@ -103,8 +126,25 @@ public class Item extends Sprite implements MouseListener, Selectable {
         return true;
     }
 
-    // Todo: 
+    public ToolTip getToolTip() {
+        return new ToolTip(this.toString());
+    }
+    
     public String toString() {
-        return "";
+
+        String text = "<html>";
+        text += name + "<br>";
+        
+        for (String stat : itemStats.keySet()) {
+            if (itemStats.get(stat) > 0) {
+                text += "+";
+            }
+
+            text += itemStats.get(stat) + " " + stat + "<br>";
+        }
+
+        text += "</html>";
+
+        return text;
     }
 }

@@ -17,6 +17,7 @@ import UI.*;
 
 public class Entity extends Sprite implements MouseListener, Selectable {
     
+    private String file;
 
     private String name;
     private Map<String, Integer> stats;
@@ -28,6 +29,7 @@ public class Entity extends Sprite implements MouseListener, Selectable {
     public Entity(String file, String name, int health, int maxHealth, int attack, int magic,
                     int defense, int speed) {
         super(file);
+        this.file = file;
         this.name = name;
         stats = new HashMap<>();
         moves = new ArrayList<>();
@@ -87,7 +89,7 @@ public class Entity extends Sprite implements MouseListener, Selectable {
     }
 
     public void mouseEntered(MouseEvent e) {
-        if (e != null) {
+        if (e != null && gameInteractable()) {
             toolTipTimer.restart();
             toolTipTimer.start();
         }
@@ -100,7 +102,7 @@ public class Entity extends Sprite implements MouseListener, Selectable {
     }
 
     public void mouseExited(MouseEvent e) {
-        if (e != null) {
+        if (e != null && gameInteractable()) {
             toolTipTimer.stop();
             Screen.getCard().removeToolTip();
         }
@@ -230,5 +232,7 @@ public class Entity extends Sprite implements MouseListener, Selectable {
         return text;
     }
 
-
+    public Sprite spriteCopy() {
+        return new Sprite(file);
+    }
 }

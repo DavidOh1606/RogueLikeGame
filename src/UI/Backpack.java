@@ -38,4 +38,8 @@ public class Backpack extends GameButton {
         centerPanel.revalidate();
         centerPanel.repaint();
     }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
 }

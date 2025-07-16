@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 
+
 public class Battle extends GameCard {
     
 
@@ -26,8 +27,9 @@ public class Battle extends GameCard {
     private MoveManager moveManager;
     private MoveTextPanel moveText;
 
-    public Battle(List<Entity> heros, List<Entity> enemies) {
+    public Battle(List<Entity> enemies) {
 
+        List<Entity> heros = GameData.getGameData().heros;
         
         JPanel background = getBg();
         background.setLayout(new BoxLayout(background, BoxLayout.X_AXIS));
@@ -179,7 +181,7 @@ public class Battle extends GameCard {
         if (TurnManager.isEnemyTurn() && e == null) {
             return true;
         }
-        
+
         return super.interactable(e);
     }
 

@@ -169,7 +169,7 @@ public class Card extends JPanel implements MouseListener{
     // Should be overriden once again.
     public boolean interactable(MouseEvent e) {
 
-        if (selection == null || !focused) {
+        if (selection == null || !focused || !gameFocused) {
             return false;
         }
 

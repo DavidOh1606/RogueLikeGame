@@ -8,7 +8,7 @@ public class GameData {
 
     private static GameData gameData = new GameData();
 
-    public List<Hero> heros = new ArrayList<>();
+    public List<Entity> heros = new ArrayList<>();
 
     private GameData() {
         heros.add(new Knight());

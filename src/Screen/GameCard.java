@@ -22,6 +22,7 @@ public class GameCard extends Card {
 
     private boolean canManageInventory;
 
+    private Backpack backpack;
 
     public GameCard() {
         itemSelection = null;
@@ -37,8 +38,11 @@ public class GameCard extends Card {
 
         menuLayer.add(buttonPanel);
 
+
+        backpack = new Backpack();
+
         buttonPanel.add(new MenuButton());
-        buttonPanel.add(new Backpack());
+        buttonPanel.add(backpack);
 
         centerPanel = new JPanel();
 
@@ -135,9 +139,14 @@ public class GameCard extends Card {
     public void mousePressed(MouseEvent e) {
         super.mousePressed(e);
 
-        resetButtonSelection();
         resetItemSelection();
 
+        resetButtonSelection();
+
+    }
+
+    public Inventory getInventory() {
+        return backpack.getInventory();
     }
 
     public boolean canManageInventory() {

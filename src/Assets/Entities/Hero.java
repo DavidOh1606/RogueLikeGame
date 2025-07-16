@@ -18,7 +18,7 @@ public class Hero extends Entity {
         itemSlots = new ArrayList<>();
 
         for (int i = 0; i < NUM_ITEMS; i++) {
-            itemSlots.add(new ItemSlot());
+            itemSlots.add(new ItemSlot(this));
         }
 
         addMove(new Attack());

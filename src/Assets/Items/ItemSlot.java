@@ -6,6 +6,9 @@ import java.awt.event.*;
 
 import Screen.*;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class ItemSlot extends Sprite implements MouseListener {
     private static final String FILE = "src/Images/Items/itemslot.png";
 
@@ -13,10 +16,18 @@ public class ItemSlot extends Sprite implements MouseListener {
     private Hero hero;
     private Item item;
 
+    private GridBagConstraints c;
+
     public ItemSlot() {
         super(FILE);
         item = null;
         hero = null;
+
+        setLayout(new GridBagLayout());
+        c = new GridBagConstraints();
+        c.anchor = GridBagConstraints.CENTER;
+
+        addMouseListener(this);
     }
 
     public ItemSlot(Hero hero) {
@@ -27,7 +38,7 @@ public class ItemSlot extends Sprite implements MouseListener {
 
 
     public void addItem(Item item) {
-        if (item != null) {
+        if (this.item != null) {
             return;
         }
 
@@ -36,6 +47,14 @@ public class ItemSlot extends Sprite implements MouseListener {
         if (hero != null) {
             hero.equipItem(item);
         }
+
+        add(item, c);
+
+        GameCard.getGameCard().resetItemSelection();
+        GameCard.getGameCard().getInventory().resetTextLabels();
+
+        revalidate();
+        repaint();
     }
 
     public void removeItem() {
@@ -45,15 +64,48 @@ public class ItemSlot extends Sprite implements MouseListener {
 
         if (hero != null) {
             hero.removeItem(item);
+
         }
 
-    }
+        remove(item);
 
+        GameCard.getGameCard().getInventory().resetTextLabels();
+
+        item = null;
+        revalidate();
+        repaint();
+
+    }
 
     public void mousePressed(MouseEvent e) {
         if (!interactable(e)) {
             return;
         }
+
+        Item newItem = (Item) GameCard.getGameCard().getItemSelection();
+
+        Container itemParent = newItem.getParent();
+
+
+        if (itemParent instanceof ItemSlot) {
+            ItemSlot itemSlotParent = (ItemSlot) itemParent;
+
+            itemSlotParent.removeItem();
+            if (this.item != null) {
+                itemSlotParent.addItem(item);
+                removeItem();
+            }
+        }
+
+        else {
+            itemParent.remove(newItem);
+            itemParent.revalidate();
+            itemParent.repaint();
+        }
+
+        addItem(newItem);
+
+        setAlpha(1.0f);
     }
 
     public void mouseClicked(MouseEvent e) {
@@ -88,6 +140,13 @@ public class ItemSlot extends Sprite implements MouseListener {
         if (GameCard.getGameCard().getItemSelection() == null) {
             return false;
         }
+
+        Component itemParent = ((Component) GameCard.getGameCard().getItemSelection()).getParent();
+
+        if (itemParent == this) {
+            return false;
+        }
+
 
         return true;
     }

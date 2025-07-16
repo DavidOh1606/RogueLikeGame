@@ -4,6 +4,8 @@ import Assets.*;
 import Assets.Entities.*;
 import Assets.Items.*;
 
+import Screen.*;
+
 import java.awt.event.*;
 
 import java.awt.*;
@@ -25,10 +27,12 @@ public class Inventory extends Sprite implements MouseListener {
         GameData gameData = GameData.getGameData();
 
         JPanel panel = new JPanel();
+        JPanel panelRight = new JPanel();
         JPanel leftPanel = new JPanel();
         JPanel rightPanel = new JPanel();
 
         panel.setOpaque(false);
+        panelRight.setOpaque(false);
         leftPanel.setOpaque(false);
         rightPanel.setOpaque(false);
         
@@ -41,20 +45,20 @@ public class Inventory extends Sprite implements MouseListener {
         entityPanels = new ArrayList<>();
         textLabels = new ArrayList<>();
 
-        for (Hero entity : gameData.heros) {
-
+        for (Entity entity : gameData.heros) {
+            Hero hero = (Hero) entity;
             JPanel entityPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
             entityPanel.setOpaque(false);
             TextLabel entityLabel = new TextLabel();
-            
+            textLabels.add(entityLabel);
 
-            entityLabel.setText(entity.toString());
+            entityLabel.setText(hero.toString());
 
 
-            entityPanel.add(entity);
+            entityPanel.add(hero.spriteCopy());
             entityPanel.add(entityLabel);
 
-            for (ItemSlot itemSlot : entity.getItemSlots()) {
+            for (ItemSlot itemSlot : hero.getItemSlots()) {
                 entityPanel.add(itemSlot);
             }
 
@@ -67,8 +71,9 @@ public class Inventory extends Sprite implements MouseListener {
         rightPanel.add(new InventorySpace());
 
         panel.add(leftPanel);
+        panelRight.add(rightPanel);
         add(panel);
-        add(rightPanel);
+        add(panelRight);
         
         revalidate();
         repaint();
@@ -78,8 +83,15 @@ public class Inventory extends Sprite implements MouseListener {
     }
 
 
-    public void mousePressed(MouseEvent e) {
+    public void resetTextLabels() {
+        for (int i = 0; i < textLabels.size(); i++) {
+            textLabels.get(i).setText(GameData.getGameData().heros.get(i).toString());
+        }
+    }
 
+
+    public void mousePressed(MouseEvent e) {
+        GameCard.getGameCard().resetItemSelection();
     }
 
     public void mouseClicked(MouseEvent e) {

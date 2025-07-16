@@ -17,15 +17,10 @@ public class Play extends Button {
     public void action() {
         
 
-        List<Entity> heros = new ArrayList<>();
         List<Entity> enemies = new ArrayList<>();
 
-        heros.add(new Knight());
-        heros.add(new Rogue());
-        heros.add(new Ranger());
-        heros.add(new Wizard());
         enemies.add(new Skeleton());
 
-        Screen.switchCard(new Battle(heros, enemies));
+        Screen.switchCard(new Battle(enemies));
     }
 }

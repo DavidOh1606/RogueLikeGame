@@ -16,6 +16,7 @@ public class Testing extends GameCard {
         Item gainedItem = new RingPower();
 
         background.add(gainedItem);
+        background.add(new RingMagic());
 
 
 
