@@ -118,6 +118,10 @@ public class Entity extends Sprite implements MouseListener, Selectable {
             return true;
         }
 
+        if (!super.interactable() || !super.gameInteractable()) {
+            return false;
+        }
+
         if (!selectable || Screen.getCard().getSelection() == this || TurnManager.isEnemyTurn()) {
             return false;
         }

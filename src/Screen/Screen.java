@@ -44,8 +44,8 @@ public class Screen extends JFrame implements KeyListener, ComponentListener {
         cardLayout = new CardLayout();
         cards.setLayout(cardLayout);
         add(cards);
-        card = new Menu();
-        //card = new Testing();
+        //card = new Menu();
+        card = new Testing();
         
         cards.add(card, "");
         cardLayout.show(cards, "");

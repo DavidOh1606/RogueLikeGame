@@ -13,7 +13,9 @@ public class Testing extends GameCard {
     public Testing() {
         JPanel background = getBg();
 
-        background.add(new RingPower());
+        Item gainedItem = new RingPower();
+
+        background.add(gainedItem);
 
 
 

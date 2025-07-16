@@ -30,7 +30,25 @@ public class Hero extends Entity {
     }
 
 
-    public void equipItem() {
+    public void equipItem(Item item) {
+        Map<String, Integer> heroStats = getStats();
+        Map<String, Integer> itemStats = item.getStats();
+
+        for (String stat : itemStats.keySet()) {
+            heroStats.put(stat, heroStats.get(stat) + itemStats.get(stat));
+        }
+
+
+    }
+
+    public void removeItem(Item item) {
+        Map<String, Integer> heroStats = getStats();
+        Map<String, Integer> itemStats = item.getStats();
+
+        for (String stat : itemStats.keySet()) {
+            heroStats.put(stat, heroStats.get(stat) - itemStats.get(stat));
+        }
+
 
     }
 

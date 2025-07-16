@@ -8,6 +8,7 @@ import javax.swing.border.*;
 import UI.*;
 
 import Assets.*;
+import Assets.Items.*;
 
 
 public class GameCard extends Card {
@@ -15,10 +16,16 @@ public class GameCard extends Card {
     private JPanel menuLayer;
     private JPanel centerPanel;
 
+
+    private Selectable itemSelection;
     private Selectable buttonSelection;
+
+    private boolean canManageInventory;
 
 
     public GameCard() {
+        itemSelection = null;
+        buttonSelection = null;
 
         menuLayer = getMenuLayer();
 
@@ -39,7 +46,7 @@ public class GameCard extends Card {
 
         menuLayer.add(centerPanel);
 
-
+        canManageInventory = true;
 
     }   
 
@@ -51,15 +58,24 @@ public class GameCard extends Card {
         }
 
         buttonSelection = selection;
+
+        // Delete l8r if not needed.
         GameButton button = (GameButton) selection;
 
     }
 
     public void resetButtonSelection() {
 
+        if (buttonSelection == null) {
+            return;
+        }
+
+      /* 
         if (!(buttonSelection instanceof GameButton)) {
             return;
-        }   
+        }    
+            */
+
         GameButton button = (GameButton) buttonSelection;
 
         buttonSelection = null;
@@ -68,6 +84,37 @@ public class GameCard extends Card {
 
     public Selectable getButtonSelection() {
         return buttonSelection;
+    }
+
+    public void setItemSelection(Selectable selection) {
+        resetItemSelection();
+
+        if (!(selection instanceof Item)) {
+            return;
+        }
+
+        this.itemSelection = selection;
+
+        // Maybe Delete later?;
+        Item item = (Item) selection;
+
+    }
+
+    public void resetItemSelection() {
+        if (itemSelection == null) {
+            return;
+        }
+
+        // Check if instanceof if the code starts tripping
+        // Otherwise delete this comment
+        
+        Item item = (Item) itemSelection;
+        itemSelection = null;
+        item.setSelected(false);
+    }
+
+    public Selectable getItemSelection() {
+        return itemSelection;
     }
 
 
@@ -89,7 +136,15 @@ public class GameCard extends Card {
         super.mousePressed(e);
 
         resetButtonSelection();
+        resetItemSelection();
 
     }
 
+    public boolean canManageInventory() {
+        return canManageInventory;
+    }
+
+    public void setCanManageInventory(boolean canManageInventory) {
+        this.canManageInventory = canManageInventory;
+    }
 }

@@ -22,7 +22,7 @@ public class MenuButton extends GameButton {
 
         JPanel panel = gameCard.getCenterPanel();
         panel.add(inGameMenu);
-        gameCard.setFocused(false);
+        gameCard.setGameFocused(false);
         gameCard.revalidate();
         gameCard.repaint();
 
@@ -34,7 +34,7 @@ public class MenuButton extends GameButton {
 
         JPanel panel = gameCard.getCenterPanel();
         panel.remove(inGameMenu);
-        gameCard.setFocused(true);
+        gameCard.setGameFocused(true);
         gameCard.revalidate();
         gameCard.repaint();
 

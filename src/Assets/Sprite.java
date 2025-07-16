@@ -12,6 +12,7 @@ import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
 
+
 public class Sprite extends JPanel {
     
     protected static final float ALPHA = 0.5f;
@@ -147,5 +148,21 @@ public class Sprite extends JPanel {
             }
 
         }
+    }
+
+    public boolean interactable() {
+        if (!Screen.getCard().getFocused()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean gameInteractable() {
+        if (!Screen.getCard().getGameFocused()) {
+            return false;
+        }
+
+        return true;
     }
 }
