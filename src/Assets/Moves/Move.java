@@ -12,6 +12,8 @@ import Screen.*;
 
 public abstract class Move extends Sprite implements MouseListener, Selectable {
     
+    public static boolean moveLocked = false;;
+
     private String name;
     private boolean selectable;
     private int uses;
@@ -22,6 +24,9 @@ public abstract class Move extends Sprite implements MouseListener, Selectable {
         this.name = name;
         selectable = true;
         addMouseListener(this);
+
+        uses = -1;
+        maxUses = -1;
     }
 
     public abstract void use(Entity user, Entity target);
@@ -100,4 +105,42 @@ public abstract class Move extends Sprite implements MouseListener, Selectable {
         return name;
     }
 
+    public int getMaxUses() {
+        return maxUses;
+    }
+
+    public void setMaxUses(int maxUses, boolean reset) {
+        this.maxUses = maxUses;
+
+        if (reset) {
+            resetNumUses();
+        }
+    }
+
+    public int getUses() {
+        return uses;
+    }
+
+    public void reduceUses() {
+        uses--;
+    }
+
+    public void resetNumUses() {
+        uses = maxUses;
+    }
+
+
+    public String toString() {
+        String text = "<html>";
+
+        text += name + "<br>";
+
+        if (maxUses > 0) {
+            text += "Uses: " + uses + "/" + maxUses + "<br>";
+        }
+
+        text += "</html>";
+
+        return text;
+    }
 }

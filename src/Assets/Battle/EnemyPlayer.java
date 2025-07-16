@@ -10,6 +10,8 @@ public class EnemyPlayer {
 
     private EnemyPlayerMove bestMove;
 
+    private Timer currentTimer;
+
     public EnemyPlayer(EnemyPlayerMove bestMove) {
         this.bestMove = bestMove;
 
@@ -21,6 +23,16 @@ public class EnemyPlayer {
 
         timer.setRepeats(false);
         timer.start();
+        currentTimer = timer;
+    }
+
+    public void pauseMove() {
+        currentTimer.stop();
+    }
+
+    public void restartMove() {
+        currentTimer.restart();
+        currentTimer.start();
     }
 
     public void makeEnemySelection() {
@@ -35,6 +47,7 @@ public class EnemyPlayer {
 
         timer.setRepeats(false);
         timer.start();
+        currentTimer = timer;
     }
 
     public void selectMove() {
@@ -53,6 +66,7 @@ public class EnemyPlayer {
 
         timer.setRepeats(false);
         timer.start();
+        currentTimer = timer;
     }
 
     public void makeTargetSelection() {
@@ -66,10 +80,13 @@ public class EnemyPlayer {
 
         timer.setRepeats(false);
         timer.start();
+        currentTimer = timer;
     }
 
     public void makeMove() {
         bestMove.target.getTarget().mousePressed(null);
         Screen.getCard().resetSelection();
+
+        bestMove.user.removeEnemyPlayer();
     }
 }

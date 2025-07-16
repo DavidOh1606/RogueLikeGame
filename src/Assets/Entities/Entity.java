@@ -16,8 +16,6 @@ import Screen.*;
 import UI.*;
 
 public class Entity extends Sprite implements MouseListener, Selectable {
-    
-    private String file;
 
     private String name;
     private Map<String, Integer> stats;
@@ -29,7 +27,6 @@ public class Entity extends Sprite implements MouseListener, Selectable {
     public Entity(String file, String name, int health, int maxHealth, int attack, int magic,
                     int defense, int speed) {
         super(file);
-        this.file = file;
         this.name = name;
         stats = new HashMap<>();
         moves = new ArrayList<>();
@@ -133,26 +130,7 @@ public class Entity extends Sprite implements MouseListener, Selectable {
         return true;
     }
 
-    public void assignDamage(int damage, int type) {
-
-        String usedModifier;
-
-        if (type == 0) {
-            usedModifier = "defense";
-        }
-
-        else if (type == 1) {
-            usedModifier = "magic";
-        }
-
-        else if (type == 2) {
-            usedModifier = "speed";
-        }
-
-        else {
-            usedModifier = "";
-        }
-
+    public void assignDamage(int damage, String usedModifier) {
 
         int actualDamage;
 
@@ -183,7 +161,7 @@ public class Entity extends Sprite implements MouseListener, Selectable {
 
     public void removeTarget() {
         if (target == null) {
-            throw new IllegalArgumentException("Attempted to remove target that does not exist");
+            return;
         }
 
         remove(target);
@@ -230,9 +208,5 @@ public class Entity extends Sprite implements MouseListener, Selectable {
         text += "</html>";
 
         return text;
-    }
-
-    public Sprite spriteCopy() {
-        return new Sprite(file);
     }
 }

@@ -13,8 +13,8 @@ public class GameData {
     private GameData() {
         heros.add(new Knight());
         heros.add(new Rogue());
-        //heros.add(new Wizard());
-        //heros.add(new Ranger());
+        heros.add(new Wizard());
+        heros.add(new Ranger());
     }
 
     public static GameData getGameData() {

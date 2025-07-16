@@ -45,7 +45,7 @@ public class MoveManager extends Sprite {
     }
 
     public void resetSelection() {
-        if (selection == null) {
+        if (selection == null || Move.moveLocked) {
             return;
         }
 
@@ -57,12 +57,21 @@ public class MoveManager extends Sprite {
     public void setSelection(Move selection) {
         resetSelection();
 
+        if (Move.moveLocked) {
+            return;
+        }
+
+
         this.selection = selection;
 
-        Battle.getMoveText().setMove(selection.getName());
+        Battle.getMoveText().setMove(selection.toString());
     }
 
     public Move getSelection() {
         return selection;
+    }
+
+    public String toString() {
+        return "hi";
     }
 }

@@ -24,8 +24,13 @@ public class Battle extends GameCard {
 
     private BattleEntityText entityText;
 
+
+    // Text Panels
+    private static final int TEXT_VERTICAL_GAP = 20;
     private MoveManager moveManager;
+    private MoveManager enemyMoveManager;
     private MoveTextPanel moveText;
+    private MoveTextPanel enemyMoveText;
 
     public Battle(List<Entity> enemies) {
 
@@ -46,20 +51,43 @@ public class Battle extends GameCard {
         heroEntities = new BattleEntityPanel(heros);
         heroPanel.add(heroEntities);
 
-        // ** entity text panel
-        JPanel entityTextPanel = new JPanel();
-        entityTextPanel.setOpaque(false);
+        // *** HeroUI
+        JPanel heroUIPanel = new JPanel();
+
+        JPanel heroUILeft = new JPanel();
+        JPanel heroUIRight = new JPanel();
+        JPanel heroUIRightChild = new JPanel();
+
+        heroUIPanel.setOpaque(false);
+        heroUILeft.setOpaque(false);
+        heroUIRight.setOpaque(false);
+        heroUIRightChild.setOpaque(false);
+
+        heroUIRightChild.setLayout(new BoxLayout(heroUIRightChild, BoxLayout.Y_AXIS));
+
+        heroUIPanel.add(heroUILeft);
+        heroUIPanel.add(heroUIRight);
+
+        heroUIRight.add(heroUIRightChild);
+
+        // ** entity text
 
         entityText = new BattleEntityText();
 
-        moveManager = new MoveManager();
+        heroUILeft.add(entityText);
 
-        entityTextPanel.add(entityText);
-        entityTextPanel.add(moveManager);
+        // ** move text panel
+
+        moveManager = new MoveManager();
+        moveText = new MoveTextPanel();
+
+        heroUIRightChild.add(moveText);
+        heroUIRightChild.add(Box.createRigidArea(new Dimension(0, TEXT_VERTICAL_GAP)));
+        heroUIRightChild.add(moveManager);
 
         // Adding all panels to leftpanel
         leftPanel.add(heroPanel);
-        leftPanel.add(entityTextPanel);
+        leftPanel.add(heroUIPanel);
 
         // * right side
         JPanel rightPanel = new JPanel();
@@ -75,18 +103,28 @@ public class Battle extends GameCard {
 
         enemyPanel.add(enemyEntities);
 
+        // ** enemy text panels
+        JPanel enemyTextPanels = new JPanel();
+        JPanel enemyTextPanelsChild = new JPanel();
 
-        // ** move text panel
-        JPanel moveTextPanel = new JPanel();
-        moveTextPanel.setOpaque(false);
+        enemyTextPanels.setOpaque(false);
+        enemyTextPanelsChild.setOpaque(false);
 
-        moveText = new MoveTextPanel();
+        enemyTextPanelsChild.setLayout(new BoxLayout(enemyTextPanelsChild, BoxLayout.Y_AXIS));
 
-        moveTextPanel.add(moveText);
+        enemyMoveManager = new MoveManager();
+        enemyMoveText = new MoveTextPanel(); 
+
+        enemyTextPanelsChild.add(enemyMoveText);
+        enemyTextPanelsChild.add(Box.createRigidArea(new Dimension(0, TEXT_VERTICAL_GAP)));
+        enemyTextPanelsChild.add(enemyMoveManager);
+
+        enemyTextPanels.add(enemyTextPanelsChild);
 
         // Adding all panels to right panel
         rightPanel.add(enemyPanel);
-        rightPanel.add(moveTextPanel);
+        rightPanel.add(enemyTextPanels);
+
 
         // Adding all panels to background
         background.add(leftPanel);
@@ -106,11 +144,18 @@ public class Battle extends GameCard {
 
         Entity c = (Entity) selection;
 
+
         entityText.setEntity(c);
-        moveManager.add(c.getMoves());
-        moveText.setUser(c.getName());
 
+        if (c instanceof Enemy) {
+            enemyMoveManager.add(c.getMoves());
+            enemyMoveText.setUser(c.getName());
+        }
 
+        else {
+            moveManager.add(c.getMoves());
+            moveText.setUser(c.getName());
+        }
     }    
 
     public void resetSelection() {
@@ -128,11 +173,19 @@ public class Battle extends GameCard {
 
         Entity entity = (Entity) tempSelection;
 
-        entity.setSelected(false);
 
+        entity.setSelected(false);
         entityText.clear();
-        moveManager.clear();
-        moveText.resetUser();
+
+        if (entity instanceof Enemy) {
+            enemyMoveManager.clear();
+            enemyMoveText.resetUser();
+        }
+
+        else {
+            moveManager.clear();
+            moveText.resetUser();
+        }
     }
 
     public static MoveManager getMoveManager() {
@@ -182,7 +235,30 @@ public class Battle extends GameCard {
             return true;
         }
 
+        if (Move.moveLocked) {
+            return false;
+        }
+
+
         return super.interactable(e);
+    }
+
+
+    // override 
+    public void setGameFocused(boolean gameFocused) {
+        super.setGameFocused(gameFocused);
+
+        if (TurnManager.isEnemyTurn()) {
+            Enemy enemy = (Enemy) TurnManager.getCurrentTurn();
+
+            if (gameFocused) {
+                enemy.getEnemyPlayer().restartMove();
+            }
+
+            else {
+                enemy.getEnemyPlayer().pauseMove();
+            }
+        }
     }
 
 }

@@ -9,6 +9,6 @@ public class Ranger extends Hero {
     private static final String FILE = "src/Images/Heros/ranger.png";
 
     public Ranger() {
-        super(FILE, "ranger", 10, 10, 12, 5, 5, 10);
+        super(FILE, "ranger", 10, 10, 12, 5, 8, 12);
     }
 }

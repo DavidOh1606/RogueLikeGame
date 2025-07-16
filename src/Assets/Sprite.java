@@ -23,6 +23,7 @@ public class Sprite extends JPanel {
 
     private BufferedImage image;
     private float alpha;
+    private String file;
 
     private boolean remove;
 
@@ -30,6 +31,7 @@ public class Sprite extends JPanel {
 
     public Sprite(String file) {
         setImage(file);
+        this.file = file;
 
         alpha = 1.0f;
         remove = true;
@@ -164,5 +166,9 @@ public class Sprite extends JPanel {
         }
 
         return true;
+    }
+
+    public Sprite spriteCopy() {
+        return new Sprite(file);
     }
 }

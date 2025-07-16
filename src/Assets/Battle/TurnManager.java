@@ -44,6 +44,10 @@ public class TurnManager {
         }
     }
 
+    public static Entity getCurrentTurn() {
+        return turns.get(turns.size() - 1);
+    }
+
     public static void sortTurnOrder() {
         List<Entity> temp = new ArrayList<>();
 
