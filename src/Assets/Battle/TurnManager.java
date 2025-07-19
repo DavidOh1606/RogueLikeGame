@@ -75,6 +75,7 @@ public class TurnManager {
         }
 
         else if (Battle.getEnemies().isEmpty()) {
+            System.exit(0);
             //Screen.switchCard(new Battle());
         }
     }

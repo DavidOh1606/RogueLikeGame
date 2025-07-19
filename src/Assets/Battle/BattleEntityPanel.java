@@ -52,7 +52,10 @@ public class BattleEntityPanel extends Sprite {
             throw new IllegalArgumentException("Entity not found");
         }
 
-        remove(entity);
+        JComponent parent = (JComponent) entity.getParent();
+        parent.remove(entity);
+        parent.remove(entity.getBar());
+        parent.repaint();
         entities.remove(entity);
         revalidate();
         repaint();

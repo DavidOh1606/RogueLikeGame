@@ -169,10 +169,6 @@ public class Battle extends GameCard {
 
     public void resetSelection() {
 
-        if (TurnManager.isEnemyTurn()) {
-            return;
-        }
-
         Selectable tempSelection = getSelection();
         super.resetSelection();
 
@@ -250,6 +246,10 @@ public class Battle extends GameCard {
     public boolean interactable(MouseEvent e) {
         if (TurnManager.isEnemyTurn() && e == null) {
             return true;
+        }
+
+        else if (TurnManager.isEnemyTurn()) {
+            return false;
         }
 
         if (Move.moveLocked) {

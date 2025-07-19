@@ -9,7 +9,6 @@ import javax.swing.*;
 public class BattleEntityBar extends Sprite {
     private static final String FILE = "src/Images/Battle/currturn.png";
 
-
     private TextLabel textLabel;
     private boolean draw;
 
@@ -20,6 +19,7 @@ public class BattleEntityBar extends Sprite {
         draw = false;
 
         add(textLabel);
+        setRemove(false);
     }
 
     public void setText(String text) {

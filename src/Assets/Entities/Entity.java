@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
+import javax.swing.*;
 import javax.swing.Timer;
 
 import Screen.*;
@@ -155,6 +156,8 @@ public class Entity extends Sprite implements MouseListener, Selectable {
 
         if (stats.get("health") <= 0) {
             Battle.removeEntity(this);
+            //TurnManager.removeEntity(this);
+
         }
 
     }

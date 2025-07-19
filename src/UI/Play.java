@@ -21,6 +21,12 @@ public class Play extends Button {
 
         enemies.add(new Skeleton());
 
+        enemies.add(new Skeleton());
+
+        enemies.add(new Skeleton());
+
+        enemies.add(new Skeleton());
+
         Screen.switchCard(new Battle(enemies));
     }
 }
