@@ -19,6 +19,7 @@ public class Battle extends GameCard {
     
 
 
+    private static final int ENTITY_VERTICAL_GAP = 100;
     private BattleEntityPanel heroEntities;
     private BattleEntityPanel enemyEntities;
 
@@ -77,15 +78,15 @@ public class Battle extends GameCard {
         heroUILeft.add(entityText);
 
         // ** move text panel
-
-        moveManager = new MoveManager();
         moveText = new MoveTextPanel();
+        moveManager = new MoveManager(moveText);
 
         heroUIRightChild.add(moveText);
         heroUIRightChild.add(Box.createRigidArea(new Dimension(0, TEXT_VERTICAL_GAP)));
         heroUIRightChild.add(moveManager);
 
         // Adding all panels to leftpanel
+        leftPanel.add(Box.createRigidArea(new Dimension(0, ENTITY_VERTICAL_GAP)));
         leftPanel.add(heroPanel);
         leftPanel.add(heroUIPanel);
 
@@ -112,8 +113,8 @@ public class Battle extends GameCard {
 
         enemyTextPanelsChild.setLayout(new BoxLayout(enemyTextPanelsChild, BoxLayout.Y_AXIS));
 
-        enemyMoveManager = new MoveManager();
         enemyMoveText = new MoveTextPanel(); 
+        enemyMoveManager = new MoveManager(enemyMoveText);
 
         enemyTextPanelsChild.add(enemyMoveText);
         enemyTextPanelsChild.add(Box.createRigidArea(new Dimension(0, TEXT_VERTICAL_GAP)));
@@ -122,6 +123,7 @@ public class Battle extends GameCard {
         enemyTextPanels.add(enemyTextPanelsChild);
 
         // Adding all panels to right panel
+        rightPanel.add(Box.createRigidArea(new Dimension(0, ENTITY_VERTICAL_GAP)));
         rightPanel.add(enemyPanel);
         rightPanel.add(enemyTextPanels);
 
@@ -130,7 +132,14 @@ public class Battle extends GameCard {
         background.add(leftPanel);
         background.add(rightPanel);
 
-        TurnManager.init(heros, enemies);
+
+        Timer timer = new Timer(500, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                TurnManager.init(heros, enemies);
+            }
+        });
+        timer.start();
+        timer.setRepeats(false);
     }
 
     public void setSelection(Selectable selection) {
@@ -192,8 +201,16 @@ public class Battle extends GameCard {
         return getBattle().moveManager;
     }
 
+    public static MoveManager getEnemyMoveManager() {
+        return getBattle().enemyMoveManager;
+    }
+
     public static MoveTextPanel getMoveText() {
         return getBattle().moveText;
+    }
+
+    public static MoveTextPanel getEnemyMoveText() {
+        return getBattle().enemyMoveText;
     }
 
     public static List<Entity> getHeros() {
@@ -248,7 +265,7 @@ public class Battle extends GameCard {
     public void setGameFocused(boolean gameFocused) {
         super.setGameFocused(gameFocused);
 
-        if (TurnManager.isEnemyTurn()) {
+        if (TurnManager.isEnemyTurn() && !Move.moveDone) {
             Enemy enemy = (Enemy) TurnManager.getCurrentTurn();
 
             if (gameFocused) {

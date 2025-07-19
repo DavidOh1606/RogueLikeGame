@@ -23,6 +23,7 @@ public class Entity extends Sprite implements MouseListener, Selectable {
     private List<Move> moves;
     private TargetBorder target;
     private Timer toolTipTimer;
+    private BattleEntityBar bar;
 
     public Entity(String file, String name, int health, int maxHealth, int attack, int magic,
                     int defense, int speed) {
@@ -46,6 +47,9 @@ public class Entity extends Sprite implements MouseListener, Selectable {
         stats.put("magic", magic);
         stats.put("defense", defense);
         stats.put("speed", speed);
+
+        bar = new BattleEntityBar();
+        updateBarText();
 
         addMouseListener(this);
         setLayout(null);
@@ -147,6 +151,7 @@ public class Entity extends Sprite implements MouseListener, Selectable {
         }
 
         stats.put("health", stats.get("health") - actualDamage);
+        updateBarText();
 
         if (stats.get("health") <= 0) {
             Battle.removeEntity(this);
@@ -196,6 +201,19 @@ public class Entity extends Sprite implements MouseListener, Selectable {
     public ToolTip getToolTip() {
         return new ToolTip(this.toString());
     }
+
+    public BattleEntityBar getBar() {
+        return bar;
+    }   
+
+    public void updateBarText() {
+        bar.setText("Health: " + stats.get("health") + "/" + stats.get("maxHealth"));
+    }
+
+    public void setBarDraw(boolean draw) {
+        bar.setDraw(draw);
+    }
+
 
     public String toString() {
         String text = "<html>";

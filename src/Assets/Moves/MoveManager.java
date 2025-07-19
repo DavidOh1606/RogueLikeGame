@@ -15,11 +15,13 @@ public class MoveManager extends Sprite {
 
     private Move selection;
     private List<Move> moves;
+    private MoveTextPanel moveText;
 
-    public MoveManager() {
+    public MoveManager(MoveTextPanel moveText) {
         super(FILE);
         selection = null;
         moves = new ArrayList<>();
+        this.moveText = moveText;
     }
 
     public void add(List<Move> moves) {
@@ -52,7 +54,7 @@ public class MoveManager extends Sprite {
         selection.setSelected(false);
         selection = null;
 
-        Battle.getMoveText().resetMove();
+        moveText.resetMove();
     }
     public void setSelection(Move selection) {
         resetSelection();
@@ -64,14 +66,11 @@ public class MoveManager extends Sprite {
 
         this.selection = selection;
 
-        Battle.getMoveText().setMove(selection.toString());
+        moveText.setMove(selection.toString());
     }
 
     public Move getSelection() {
         return selection;
     }
 
-    public String toString() {
-        return "hi";
-    }
 }

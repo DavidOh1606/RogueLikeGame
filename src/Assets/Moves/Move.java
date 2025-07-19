@@ -12,7 +12,9 @@ import Screen.*;
 
 public abstract class Move extends Sprite implements MouseListener, Selectable {
     
-    public static boolean moveLocked = false;;
+    public static boolean moveLocked = false;
+    public static boolean moveDone = false;
+
 
     private String name;
     private boolean selectable;

@@ -27,6 +27,8 @@ public class TurnManager {
 
     public static void changeTurn() {
         Entity currentTurn = turns.remove(0);
+        currentTurn.setBarDraw(true);
+        turns.get(turns.size() - 1).setBarDraw(false);
         turns.get(turns.size() - 1).setSelectable(false);
         turns.add(currentTurn);
         currentTurn.setSelectable(true);

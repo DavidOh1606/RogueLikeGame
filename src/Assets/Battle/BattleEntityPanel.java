@@ -1,9 +1,12 @@
 package Assets.Battle;
 
 import Assets.*;
-import Assets.Entities.Entity;
+import Assets.Entities.*;
 
 import java.util.List;
+
+import java.awt.*;
+import javax.swing.*;
 
 public class BattleEntityPanel extends Sprite {
     private static final String FILE = "src/Images/Battle/battleentitypanel.png";
@@ -12,10 +15,32 @@ public class BattleEntityPanel extends Sprite {
 
     public BattleEntityPanel(List<Entity> entities) {
         super(FILE);
+
+        JPanel panel = new JPanel();
+        panel.setOpaque(false);
+
+        if (entities.get(0) instanceof Hero) {
+            panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        } 
+
+        else {
+            panel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        }
+
+
         this.entities = entities;
         for (Entity entity : entities) {
-            add(entity);
+            JPanel entityPanel = new JPanel();
+            entityPanel.setLayout(new BoxLayout(entityPanel, BoxLayout.Y_AXIS));
+            entityPanel.setOpaque(false);
+
+            entityPanel.add(entity);
+            entityPanel.add(entity.getBar());
+
+            panel.add(entityPanel);
         }
+
+        add(panel);
     }
 
     public List<Entity> getEntities() {

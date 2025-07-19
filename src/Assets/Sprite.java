@@ -41,6 +41,11 @@ public class Sprite extends JPanel {
         addToResize();
     }
 
+    // Delete later maybe
+    public BufferedImage getBuffImage() {
+        return image;
+    }
+
     public void setImage(String file) {
         try {
             setImage(ImageIO.read(new File(file)));

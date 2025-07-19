@@ -19,4 +19,16 @@ public class EnemyAttack extends Attack {
             hero.removeTarget();
         }
     }
+
+    public void setSelected(boolean selected) {
+        if (selected) {
+            Battle.getEnemyMoveManager().setSelection(this);
+            displayOptions();
+        }
+
+        else {
+            resetOptions();
+            setAlpha(1.0f);
+        }
+    }
 }

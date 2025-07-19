@@ -27,8 +27,16 @@ public class TargetBorder extends Sprite implements MouseListener {
         }
 
         Entity user = (Entity) Screen.getCard().getSelection();
-        Move move = Battle.getMoveManager().getSelection();
 
+        Move move;
+        if (TurnManager.isEnemyTurn()) {
+            move = Battle.getEnemyMoveManager().getSelection();
+        }
+
+        else {
+            move = Battle.getMoveManager().getSelection();
+        }
+        
         move.use(user, target);
 
     }
@@ -60,6 +68,10 @@ public class TargetBorder extends Sprite implements MouseListener {
 
     private boolean interactable(MouseEvent e) {
         if (TurnManager.isEnemyTurn() && e != null) {
+            return false;
+        }
+
+        if (Move.moveDone) {
             return false;
         }
 

@@ -5,17 +5,22 @@ import Assets.Entities.Entity;
 import Assets.Battle.*;
 
 import java.util.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 import Screen.*;
 
 public class Attack extends Move {
     private static final String FILE = "src/Images/Moves/attack.png";
 
+    private String file;
     private String typeUsed;
     private String typeDefense;
 
     public Attack(String file, String name, String typeUsed, String typeDefense) {
         super(file, name);
+        this.file = file;
         this.typeUsed = typeUsed;
         this.typeDefense = typeDefense;
     }
@@ -31,16 +36,25 @@ public class Attack extends Move {
     public void use(Entity user, Entity target) {
         Map<String, Integer> userStats = user.getStats();
 
-        TurnManager.changeTurn();
-        
-        target.assignDamage(userStats.get(typeUsed), typeDefense);
+        Move.moveDone = true;
 
-        Battle.getMoveManager().resetSelection();
+        MoveSpriteAnimation animation = new MoveSpriteAnimation(file, user, target, 
+        new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                TurnManager.changeTurn();
+                
+                target.assignDamage(userStats.get(typeUsed), typeDefense);
 
-        if (getMaxUses() != -1) {
-            reduceUses();
-        }
+                if (getMaxUses() != -1) {
+                    reduceUses();
+                }
+                Move.moveDone = false;
+                Screen.getCard().resetSelection();
+                Battle.getMoveManager().resetSelection();
+            }
+        });
 
+        Screen.getCard().getEffectsLayer().add(animation);
     }
 
     public void displayOptions() {

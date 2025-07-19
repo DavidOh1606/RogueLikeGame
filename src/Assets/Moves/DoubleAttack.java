@@ -1,10 +1,11 @@
 package Assets.Moves;
 
 import java.util.Map;
+import java.awt.event.*;
 
 import Assets.Battle.TurnManager;
 import Assets.Entities.*;
-import Screen.Battle;
+import Screen.*;
 
 public class DoubleAttack extends Attack {
     
@@ -25,23 +26,37 @@ public class DoubleAttack extends Attack {
         Map<String, Integer> userStats = user.getStats();
 
 
+        MoveSpriteAnimation animation;
+
         if (attackedOnce) {
-            TurnManager.changeTurn();
-            Move.moveLocked = false;
-            attackedOnce = false;
+
+            Move.moveDone = true;
             reduceUses();
+            Battle.getMoveText().setMove(this.toString());
+
+            animation = new MoveSpriteAnimation(FILE, user, target, new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    TurnManager.changeTurn();
+                    Move.moveLocked = false;
+                    Move.moveDone = false;
+                    attackedOnce = false;
+                    target.assignDamage(userStats.get(getTypeUsed()), getTypeDefense());
+                    Battle.getMoveManager().resetSelection();
+                }
+            });
         }
+
         else {
             Move.moveLocked = true;
             attackedOnce = true;
+            animation = new MoveSpriteAnimation(FILE, user, target, new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    target.assignDamage(userStats.get(getTypeUsed()), getTypeDefense());
+                }
+            });
         }
 
-        target.assignDamage(userStats.get(getTypeUsed()), getTypeDefense());
-
-
-        if (!Move.moveLocked) {
-            Battle.getMoveManager().resetSelection();
-        }
+        Screen.getCard().getEffectsLayer().add(animation);
 
     }
 }

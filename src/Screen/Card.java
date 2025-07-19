@@ -26,6 +26,7 @@ public class Card extends JPanel implements MouseListener{
     // JPanels that represent the different layers
     private JPanel background;
     private JPanel menuLayer;
+    private JPanel effectsLayer;
     private JPanel toolTipLayer;
     private ToolTip toolTip;
 
@@ -48,16 +49,20 @@ public class Card extends JPanel implements MouseListener{
 
         background = new Sprite("src/Images/bg.png");
         menuLayer = new JPanel();
+        effectsLayer = new JPanel();
         toolTipLayer = new JPanel();
 
         menuLayer.setOpaque(false);
+        effectsLayer.setOpaque(false);
         toolTipLayer.setOpaque(false);
 
+        effectsLayer.setLayout(null);
         toolTipLayer.setLayout(null);
             
         layers.add(background, JLayeredPane.DEFAULT_LAYER);
-        layers.add(menuLayer, JLayeredPane.PALETTE_LAYER);
-        layers.add(toolTipLayer, JLayeredPane.MODAL_LAYER);
+        layers.add(effectsLayer, JLayeredPane.PALETTE_LAYER);
+        layers.add(menuLayer, JLayeredPane.MODAL_LAYER);
+        layers.add(toolTipLayer, JLayeredPane.POPUP_LAYER);
 
         add(layers);
 
@@ -79,6 +84,7 @@ public class Card extends JPanel implements MouseListener{
         layers.setBounds(0, 0, width, height);
         background.setBounds(0, 0, width, height);
         menuLayer.setBounds(0, 0, width, height);
+        effectsLayer.setBounds(0, 0, width, height);
         toolTipLayer.setBounds(0, 0, width, height);
     }
 
@@ -150,6 +156,11 @@ public class Card extends JPanel implements MouseListener{
     public JPanel getMenuLayer() {
         return menuLayer;
     }
+
+    public JPanel getEffectsLayer() {
+        return effectsLayer;
+    }
+
     public void mouseClicked(MouseEvent e) {
 
     }
