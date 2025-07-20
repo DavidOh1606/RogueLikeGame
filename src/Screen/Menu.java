@@ -34,7 +34,13 @@ public class Menu extends Card {
         buttonPanel.setOpaque(false);
 
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 80)));
+        
         buttonPanel.add(new Play());
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        buttonPanel.add(new LoadGame());
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
         buttonPanel.add(new Quit());

@@ -13,11 +13,14 @@ import javax.swing.*;
 import java.util.Map;
 import java.util.HashMap;
 
+import Assets.Moves.*;
+
 public class Item extends Sprite implements MouseListener, Selectable {
 
     private boolean selectable;
 
     private Map<String, Integer> itemStats;
+    private Move move;
     private String name;
 
     private Timer toolTipTimer;
@@ -25,6 +28,7 @@ public class Item extends Sprite implements MouseListener, Selectable {
     public Item(String file, String name) {
         super(file);
         this.name = name;
+        this.move = null;
 
         itemStats = new HashMap<>();
 
@@ -128,6 +132,14 @@ public class Item extends Sprite implements MouseListener, Selectable {
 
     public ToolTip getToolTip() {
         return new ToolTip(this.toString());
+    }
+
+    public Move getMove() {
+        return move;
+    }
+
+    public void setMove(Move move) {
+        this.move = move;
     }
     
     public String toString() {

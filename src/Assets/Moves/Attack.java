@@ -41,7 +41,6 @@ public class Attack extends Move {
         MoveSpriteAnimation animation = new MoveSpriteAnimation(file, user, target, 
         new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                TurnManager.changeTurn();
                 
                 target.assignDamage(userStats.get(typeUsed), typeDefense);
 
@@ -51,6 +50,7 @@ public class Attack extends Move {
                 Move.moveDone = false;
                 Screen.getCard().resetSelection();
                 Battle.getMoveManager().resetSelection();
+                TurnManager.changeTurn();
             }
         });
 

@@ -19,7 +19,7 @@ public class Battle extends GameCard {
     
 
 
-    private static final int ENTITY_VERTICAL_GAP = 100;
+    private static final int ENTITY_VERTICAL_GAP = 200;
     private BattleEntityPanel heroEntities;
     private BattleEntityPanel enemyEntities;
 
@@ -36,6 +36,9 @@ public class Battle extends GameCard {
     public Battle(List<Entity> enemies) {
 
         List<Entity> heros = GameData.getGameData().heros;
+        
+
+
         
         JPanel background = getBg();
         background.setLayout(new BoxLayout(background, BoxLayout.X_AXIS));

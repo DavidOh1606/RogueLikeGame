@@ -10,7 +10,13 @@ public class Knight extends Hero {
     private static final String FILE = "src/Images/Heros/blueknight.png";
 
     public Knight() {
-        super(FILE, "blueknight", 15, 15, 15, 3, 10, 3);
+        super(FILE, "blueknight", 30, 30, 15, 3, 10, 3);
+        setDescription("""
+                <html> 
+                Strong hero with high health, defense, and damage. <br>
+                Weak to magic and has low speed.
+                </html>
+                """);
     }
 
 }

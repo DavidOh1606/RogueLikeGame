@@ -42,7 +42,6 @@ public class MoveSpriteAnimation extends Sprite {
         Point point = SwingUtilities.convertPoint(user.getParent(), user.getLocation(), Screen.getCard()); 
         Point destPoint = SwingUtilities.convertPoint(target.getParent(), target.getLocation(), Screen.getCard());
 
-
         this.x = point.x;
         this.y = point.y;
         this.degrees = 0;

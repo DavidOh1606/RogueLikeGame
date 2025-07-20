@@ -11,7 +11,12 @@ public class Rogue extends Hero {
     private static final String FILE = "src/Images/Heros/rogue.png";
 
     public Rogue() {
-        super(FILE, "rogue", 10, 10, 10, 5, 2, 15);
+        super(FILE, "rogue", 10, 10, 18, 5, 2, 15);
         addMove(new DoubleAttack());
+        setDescription("""
+                <html>
+                Fast hero capable of dealing large amounts of damage.
+                </html>
+                """);
     }
 }

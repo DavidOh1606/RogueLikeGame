@@ -1,5 +1,7 @@
 package Assets.Entities;
 
+import Assets.Moves.*;
+
 // Starts with high attack and and medium defense
 // medium hp
 // Medium defense against magic
@@ -10,5 +12,12 @@ public class Ranger extends Hero {
 
     public Ranger() {
         super(FILE, "ranger", 10, 10, 12, 5, 8, 12);
+        addMove(new Arrow());
+        setDescription("""
+                <html>
+                Fast hero with decent damage output. <br>
+                Excels at taking out slow enemies.
+                </html>
+                """);
     }
 }

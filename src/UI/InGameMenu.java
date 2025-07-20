@@ -24,6 +24,9 @@ public class InGameMenu extends Sprite implements MouseListener {
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        buttonPanel.add(new ToMenu());
+
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         buttonPanel.add(new Quit());
         addMouseListener(this);
     }

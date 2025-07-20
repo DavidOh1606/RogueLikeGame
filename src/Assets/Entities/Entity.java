@@ -23,13 +23,19 @@ public class Entity extends Sprite implements MouseListener, Selectable {
     private boolean selectable;
     private List<Move> moves;
     private TargetBorder target;
+
+    private boolean displayToolTip;
     private Timer toolTipTimer;
+    
     private BattleEntityBar bar;
+
+    private String description;
 
     public Entity(String file, String name, int health, int maxHealth, int attack, int magic,
                     int defense, int speed) {
         super(file);
         this.name = name;
+        this.description = "";
         stats = new HashMap<>();
         moves = new ArrayList<>();
         toolTipTimer = new Timer(ToolTip.DELAY, new ActionListener() {
@@ -40,6 +46,7 @@ public class Entity extends Sprite implements MouseListener, Selectable {
         toolTipTimer.setRepeats(false);
 
         setRemove(false);
+        setDisplayToolTip(true);
         setSelectable(false);
 
         stats.put("health", health);
@@ -91,7 +98,7 @@ public class Entity extends Sprite implements MouseListener, Selectable {
     }
 
     public void mouseEntered(MouseEvent e) {
-        if (e != null && gameInteractable()) {
+        if (e != null && gameInteractable() && displayToolTip) {
             toolTipTimer.restart();
             toolTipTimer.start();
         }
@@ -104,7 +111,7 @@ public class Entity extends Sprite implements MouseListener, Selectable {
     }
 
     public void mouseExited(MouseEvent e) {
-        if (e != null && gameInteractable()) {
+        if (e != null && gameInteractable() && displayToolTip) {
             toolTipTimer.stop();
             Screen.getCard().removeToolTip();
         }
@@ -154,10 +161,12 @@ public class Entity extends Sprite implements MouseListener, Selectable {
         stats.put("health", stats.get("health") - actualDamage);
         updateBarText();
 
+        if (Screen.getCard() instanceof Battle) {
+            Screen.getCard().getEffectsLayer().add(new DamageEffect(this, actualDamage));
+        }
+
         if (stats.get("health") <= 0) {
             Battle.removeEntity(this);
-            //TurnManager.removeEntity(this);
-
         }
 
     }
@@ -215,6 +224,22 @@ public class Entity extends Sprite implements MouseListener, Selectable {
 
     public void setBarDraw(boolean draw) {
         bar.setDraw(draw);
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDisplayToolTip(boolean displayToolTip) {
+        this.displayToolTip = displayToolTip;
+    }
+
+    public boolean getDisplayToolTip() {
+        return displayToolTip;
     }
 
 

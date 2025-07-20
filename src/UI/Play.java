@@ -11,22 +11,11 @@ import java.util.*;
 public class Play extends Button {
     
     public Play() {
-        super("Play");
+        super("Start New Game");
     }
 
     public void action() {
         
-
-        List<Entity> enemies = new ArrayList<>();
-
-        enemies.add(new Skeleton());
-
-        enemies.add(new Skeleton());
-
-        enemies.add(new Skeleton());
-
-        enemies.add(new Skeleton());
-
-        Screen.switchCard(new Battle(enemies));
+        Screen.switchCard(new HeroChoice());
     }
 }

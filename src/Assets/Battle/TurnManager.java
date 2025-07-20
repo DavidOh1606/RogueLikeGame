@@ -26,6 +26,9 @@ public class TurnManager {
     }
 
     public static void changeTurn() {
+        if (checkWin()) {
+            return;
+        }
         Entity currentTurn = turns.remove(0);
         currentTurn.setBarDraw(true);
         turns.get(turns.size() - 1).setBarDraw(false);
@@ -69,20 +72,27 @@ public class TurnManager {
         turns = temp;
     }
 
-    public static void checkWin() {
+    public static boolean checkWin() {
         if (Battle.getHeros().isEmpty()) {
-            //Screen.switchCard(new Battle());
+            Screen.switchCard(new Menu());
+            return true;
         }
 
         else if (Battle.getEnemies().isEmpty()) {
-            System.exit(0);
-            //Screen.switchCard(new Battle());
+
+            List<Entity> enemies = new ArrayList<>();
+            enemies.add(new Skeleton());
+            enemies.add(new Skeleton());
+
+            Screen.switchCard(new Battle(enemies));
+            return true;
         }
+
+        return false;
     }
 
     public static void removeEntity(Entity entity) {
         turns.remove(entity);
-        checkWin();
     }
 
     public static boolean isEnemyTurn() {

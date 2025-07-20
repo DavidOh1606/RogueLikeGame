@@ -36,12 +36,13 @@ public class DoubleAttack extends Attack {
 
             animation = new MoveSpriteAnimation(FILE, user, target, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    TurnManager.changeTurn();
+
                     Move.moveLocked = false;
                     Move.moveDone = false;
                     attackedOnce = false;
                     target.assignDamage(userStats.get(getTypeUsed()), getTypeDefense());
                     Battle.getMoveManager().resetSelection();
+                    TurnManager.changeTurn();
                 }
             });
         }
@@ -49,9 +50,17 @@ public class DoubleAttack extends Attack {
         else {
             Move.moveLocked = true;
             attackedOnce = true;
+            Move.moveDone = true;
             animation = new MoveSpriteAnimation(FILE, user, target, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     target.assignDamage(userStats.get(getTypeUsed()), getTypeDefense());
+                    Move.moveDone = false;
+
+                    if (TurnManager.checkWin()) {
+                        Move.moveLocked = false;
+                        attackedOnce = false;
+                        reduceUses();
+                    }
                 }
             });
         }
