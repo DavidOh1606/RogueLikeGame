@@ -1,5 +1,8 @@
 package Assets.Entities;
 
+import java.util.List;
+
+import Assets.LevelUp.*;
 import Assets.Moves.*;
 
 // Low attack but able to attack with magic
@@ -19,5 +22,11 @@ public class Wizard extends Hero {
                 Has magic skills to deal magic attacks.
                 </html>
                 """);
+
+        List<LevelUpChoice> levelUpChoices = getLevelUpChoices();
+        levelUpChoices.add(new LevelUpHealth(10));
+        levelUpChoices.add(new LevelUpDefense(2));
+        levelUpChoices.add(new LevelUpMagic(15));
+        levelUpChoices.add(new LevelUpSpeed(4));
     }
 }

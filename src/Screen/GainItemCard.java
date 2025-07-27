@@ -31,7 +31,7 @@ public class GainItemCard extends GameCard {
 
         List<Entity> enemies = EnemyParty.getEnemies(GameData.getGameData().round);
 
-        buttonPanel.add(new Continue(new Battle(enemies)));
+        buttonPanel.add(new Continue());
 
         background.add(itemPanel);
         background.add(buttonPanel);

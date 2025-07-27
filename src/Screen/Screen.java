@@ -46,6 +46,8 @@ public class Screen extends JFrame implements KeyListener, ComponentListener {
         add(cards);
         card = new Menu();
         //card = new Testing();
+        //card = new LevelUpCard();
+
         
         switchCard(card);
         setVisible(true);

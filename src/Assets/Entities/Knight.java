@@ -1,6 +1,9 @@
 package Assets.Entities;
 
 
+import java.util.*;
+import Assets.LevelUp.*;
+
 // Starts with high damage and high defense
 // Medium hp
 // Weak to magic attacks
@@ -17,6 +20,12 @@ public class Knight extends Hero {
                 Weak to magic and has low speed.
                 </html>
                 """);
+
+        List<LevelUpChoice> levelUpChoices = getLevelUpChoices();
+        levelUpChoices.add(new LevelUpHealth(15));
+        levelUpChoices.add(new LevelUpDefense(5));
+        levelUpChoices.add(new LevelUpAttack(10));
+        levelUpChoices.add(new LevelUpSpeed(3));
     }
 
 }

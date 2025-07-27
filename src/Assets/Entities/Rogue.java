@@ -1,5 +1,12 @@
 package Assets.Entities;
 
+import java.util.List;
+
+import Assets.LevelUp.LevelUpAttack;
+import Assets.LevelUp.LevelUpChoice;
+import Assets.LevelUp.LevelUpDefense;
+import Assets.LevelUp.LevelUpHealth;
+import Assets.LevelUp.LevelUpSpeed;
 import Assets.Moves.*;
 
 // Medium Attack but has the ability to ignore defense
@@ -18,5 +25,11 @@ public class Rogue extends Hero {
                 Fast hero capable of dealing large amounts of damage.
                 </html>
                 """);
+
+        List<LevelUpChoice> levelUpChoices = getLevelUpChoices();
+        levelUpChoices.add(new LevelUpHealth(5));
+        levelUpChoices.add(new LevelUpDefense(2));
+        levelUpChoices.add(new LevelUpAttack(15));
+        levelUpChoices.add(new LevelUpSpeed(8));
     }
 }

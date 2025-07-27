@@ -7,7 +7,7 @@ import java.util.*;
 public class EnemyParty {
 
     private static final int MIN_ENEMIES = 1;
-    private static final int MAX_ENEMIES = 3;
+    private static final int MAX_ENEMIES = 2;
 
     private static final List<List<Entity>> ENEMIES = List.of(
         

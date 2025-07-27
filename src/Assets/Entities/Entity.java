@@ -242,6 +242,34 @@ public class Entity extends Sprite implements MouseListener, Selectable {
         return displayToolTip;
     }
 
+    public void heal(int heal) {
+
+
+        int newHealth = stats.get("health") + heal;
+
+        if (newHealth > stats.get("maxHealth")) {
+            healMax();
+        }
+
+        else {
+            stats.put("health", newHealth);
+        }
+
+        updateBarText();
+    }
+
+    public void healMax() {
+
+        stats.put("health", stats.get("maxHealth"));
+        updateBarText();
+    }
+
+    public void resetMoveUses() {
+        for (Move move : moves) {
+            move.resetNumUses();
+        }
+    }
+
 
     public String toString() {
         String text = "<html>";

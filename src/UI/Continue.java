@@ -1,18 +1,16 @@
 package UI;
 
 import Screen.*;
+import Assets.*;
 
 public class Continue extends Button {
-    
-    private Card nextCard;
 
-    public Continue(Card nextCard) {
+    public Continue() {
         super("Onwards!!");
-        this.nextCard = nextCard;
     }
 
     public void action() {
-        Screen.switchCard(nextCard);
+        GameData.getGameData().newRound();
     }
 
 

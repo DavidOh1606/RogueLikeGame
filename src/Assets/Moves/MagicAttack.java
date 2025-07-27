@@ -5,7 +5,7 @@ public class MagicAttack extends Attack {
 
     public MagicAttack() {
         super(FILE, "Magic Blast", "magic", "magic");
-        setMaxUses(3, true);
+        //setMaxUses(3, true);
         setDescription("Damage is based on magic.");
     }
 }

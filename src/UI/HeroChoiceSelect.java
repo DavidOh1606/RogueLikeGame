@@ -19,6 +19,7 @@ public class HeroChoiceSelect extends Button {
 
     public void action() {
         GameData.getGameData().heros.add(hero);
+        GameData.getGameData().main = hero;
         hero.setDisplayToolTip(true);
 
         List<Entity> enemies = new ArrayList<>();

@@ -3,11 +3,13 @@ package Assets.Entities;
 import java.util.*;
 import Assets.Moves.*;
 import Assets.Items.*;
+import Assets.LevelUp.*;
 
 public class Hero extends Entity {
 
     public static final int NUM_ITEMS = 3;
 
+    private List<LevelUpChoice> levelUpChoices;
     private List<ItemSlot> itemSlots;
 
     public Hero(String file, String name, int health, int maxHealth, int attack, int magic,
@@ -15,6 +17,7 @@ public class Hero extends Entity {
         super(file, name, health, maxHealth, attack, magic, defense, speed);
 
 
+        levelUpChoices = new ArrayList<>();
         itemSlots = new ArrayList<>();
 
         for (int i = 0; i < NUM_ITEMS; i++) {
@@ -49,10 +52,25 @@ public class Hero extends Entity {
             heroStats.put(stat, heroStats.get(stat) - itemStats.get(stat));
         }
 
-
     }
 
     public List<ItemSlot> getItemSlots() {
         return itemSlots;
     }
+
+    public void levelUp(LevelUpChoice levelUp) {
+        Map<String, Integer> levelUpStats = levelUp.getStats();
+        Map<String, Integer> heroStats = getStats();
+
+        for (String stat : levelUpStats.keySet()) {
+            heroStats.put(stat, heroStats.get(stat) + levelUpStats.get(stat));
+        }
+
+        updateBarText();
+    }
+
+    public List<LevelUpChoice> getLevelUpChoices() {
+        return levelUpChoices;
+    }
+
 }
