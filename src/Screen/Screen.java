@@ -47,8 +47,7 @@ public class Screen extends JFrame implements KeyListener, ComponentListener {
         card = new Menu();
         //card = new Testing();
         
-        cards.add(card, "");
-        cardLayout.show(cards, "");
+        switchCard(card);
         setVisible(true);
 
     }
@@ -73,6 +72,7 @@ public class Screen extends JFrame implements KeyListener, ComponentListener {
         Screen.card = card;
         cards.add(card, "");
         cardLayout.show(cards, "");
+        card.initialize();
     }
 
     public static Card getCard() {

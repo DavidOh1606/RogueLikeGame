@@ -76,9 +76,19 @@ public class Enemy extends Entity {
         Move move = enemyMove.move;
 
         if (move instanceof Attack) {
-            value += 5;
+            Map<String, Integer> targetStats = target.getStats();
+
+            value -= targetStats.get("defense") / 4;
+            value += targetStats.get("attack") / 4;
+            value += targetStats.get("magic") / 4;
+            value += targetStats.get("speed") / 6;
+
         }
 
         enemyMove.setValue(value);
+    }
+
+    public Entity createCopy() {
+        throw new IllegalArgumentException("createCopy method should be overriden");
     }
 }

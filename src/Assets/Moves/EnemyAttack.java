@@ -4,6 +4,10 @@ import Screen.*;
 import Assets.Entities.*;
 
 public class EnemyAttack extends Attack {
+    public EnemyAttack(String file, String name, String typeUsed, String typeDefense) {
+        super(file, name, typeUsed, typeDefense);
+    }
+
     public EnemyAttack() {
         super();
     }

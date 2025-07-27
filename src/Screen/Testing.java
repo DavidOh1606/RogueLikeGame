@@ -8,12 +8,16 @@ import Assets.Battle.*;
 import Assets.GameData;
 import Assets.Items.*;
 import Assets.Moves.*;
+import Assets.Entities.*;
 
 import UI.*;
 
-public class Testing extends GameCard {
+import java.util.List;
+import java.util.ArrayList;
+
+public class Testing extends GainItemCard {
     
     public Testing() {
-    
-    }
+
+    }   
 }

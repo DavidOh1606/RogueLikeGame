@@ -19,6 +19,7 @@ public class DoubleAttack extends Attack {
 
         attackedOnce = false;
         setMaxUses(3, true);
+        setDescription("Attack twice!!");
     }
 
     public void use(Entity user, Entity target) {

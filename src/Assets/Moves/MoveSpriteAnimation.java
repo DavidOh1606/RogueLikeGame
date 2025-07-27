@@ -13,8 +13,8 @@ public class MoveSpriteAnimation extends Sprite {
     
     private static final int TIME_PER_FRAME = 30;
 
-    private static final int DIST_TRAVELLED = 20;
-    private static final int DEGREES_ROTATED = 10;
+    private static final int DIST_TRAVELLED = 28;
+    private static final int DEGREES_ROTATED = 13;
 
     private int x;
     private int y;

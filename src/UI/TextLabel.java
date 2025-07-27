@@ -19,7 +19,8 @@ public class TextLabel extends JLabel {
     private static final Map<String, Integer> FONT_SIZES = Map.of(
         "TITLE", 44,
         "DEFAULT", 14,
-        "DAMAGE", 30
+        "DAMAGE", 30,
+        "ROUND", 24
     );
 
 

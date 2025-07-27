@@ -24,7 +24,6 @@ public class HeroChoiceSelect extends Button {
         List<Entity> enemies = new ArrayList<>();
 
         enemies.add(new Skeleton());
-        enemies.add(new Skeleton());
 
         Screen.switchCard(new Battle(enemies));
     }

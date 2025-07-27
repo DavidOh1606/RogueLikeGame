@@ -71,6 +71,10 @@ public class Card extends JPanel implements MouseListener{
         addMouseListener(this);
     }
 
+    public void initialize() {
+        // Called when a card is put on screen
+    }
+
     public JPanel getBg() {
         return background;
     }

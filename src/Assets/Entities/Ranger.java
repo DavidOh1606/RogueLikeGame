@@ -11,7 +11,7 @@ public class Ranger extends Hero {
     private static final String FILE = "src/Images/Heros/ranger.png";
 
     public Ranger() {
-        super(FILE, "ranger", 10, 10, 12, 5, 8, 12);
+        super(FILE, "ranger", 50, 50, 12, 5, 8, 12);
         addMove(new Arrow());
         setDescription("""
                 <html>

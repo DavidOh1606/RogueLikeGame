@@ -25,6 +25,11 @@ public class GameCard extends Card {
     private Backpack backpack;
 
     public GameCard() {
+        
+    }   
+
+    public void initialize() {
+        super.initialize();
         itemSelection = null;
         buttonSelection = null;
 
@@ -32,17 +37,33 @@ public class GameCard extends Card {
 
         menuLayer.setLayout(new BoxLayout(menuLayer, BoxLayout.Y_AXIS));
 
+        // ***
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
+        topPanel.setOpaque(false);
+
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
         buttonPanel.setOpaque(false);
 
-        menuLayer.add(buttonPanel);
+        JPanel roundPanel = new JPanel();
+        roundPanel.setOpaque(false);
 
+        topPanel.add(buttonPanel);
+        topPanel.add(roundPanel);
 
+        menuLayer.add(topPanel);
+
+        // ***
         backpack = new Backpack();
 
         buttonPanel.add(new MenuButton());
         buttonPanel.add(backpack);
+
+        TextLabel roundText = new TextLabel("" + GameData.getGameData().round);
+        roundText.setFontSize("ROUND");
+        roundText.setForeground(Color.yellow);
+
+        roundPanel.add(roundText);
 
         centerPanel = new JPanel();
 
@@ -51,8 +72,7 @@ public class GameCard extends Card {
         menuLayer.add(centerPanel);
 
         canManageInventory = true;
-
-    }   
+    }
 
     public void setButtonSelection(Selectable selection) {
         resetButtonSelection();

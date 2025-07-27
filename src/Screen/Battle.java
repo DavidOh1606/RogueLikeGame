@@ -134,15 +134,11 @@ public class Battle extends GameCard {
         // Adding all panels to background
         background.add(leftPanel);
         background.add(rightPanel);
+    }
 
-
-        Timer timer = new Timer(500, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                TurnManager.init(heros, enemies);
-            }
-        });
-        timer.start();
-        timer.setRepeats(false);
+    public void initialize() {
+        super.initialize();
+        TurnManager.init(heroEntities.getEntities(), enemyEntities.getEntities());
     }
 
     public void setSelection(Selectable selection) {
@@ -168,7 +164,7 @@ public class Battle extends GameCard {
             moveManager.add(c.getMoves());
             moveText.setUser(c.getName());
         }
-    }    
+    } 
 
     public void resetSelection() {
 

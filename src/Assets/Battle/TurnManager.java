@@ -8,7 +8,7 @@ import Assets.*;
 import Assets.Entities.*;
 
 public class TurnManager {
-    
+
     private static List<Entity> turns;
     private static boolean enemyTurn;
 
@@ -80,11 +80,18 @@ public class TurnManager {
 
         else if (Battle.getEnemies().isEmpty()) {
 
+
+            /* 
             List<Entity> enemies = new ArrayList<>();
             enemies.add(new Skeleton());
             enemies.add(new Skeleton());
 
-            Screen.switchCard(new Battle(enemies));
+            if (round )
+
+
+            Screen.switchCard(new Battle(enemies));*/
+            GameData.getGameData().newRound();
+
             return true;
         }
 

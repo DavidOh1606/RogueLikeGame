@@ -6,5 +6,7 @@ public class Arrow extends Attack {
     public Arrow() {
         super(FILE, "Ranged Shot", "speed", "speed");
         setMaxUses(3, true);
+
+        setDescription("Damage is based off speed.");
     }
 }
