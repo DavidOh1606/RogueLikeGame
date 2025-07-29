@@ -12,35 +12,33 @@ public class EnemyParty {
     private static final List<List<Entity>> ENEMIES = List.of(
         
         // Final 0 - 10
-        List.of(new Skeleton()),
+        List.of(new BlueDragon(), new RedDragon()),
 
-        List.of(),
-        List.of(),
-        List.of(),
-        List.of(),
-        List.of(),
-        List.of(),
-        List.of(),
-        List.of(),
-
+        List.of(new Imp(), new BlueDragon()),
+        List.of(new Imp(), new Soldier(), new TreeGolem()),
+        List.of(new Soldier(), new Imp(), new TreeGolem()),
+        List.of(new Soldier(), new TreeGolem()),
+        List.of(new Soldier(), new Witch()),
+        List.of(new Frog(), new Witch()),
+        List.of(new Frog(), new EvilSpirit()),
+        List.of(new Ghost(), new Skeleton()),
         // 90 - 99
-        List.of(new Skeleton(), new Ghost())
+        List.of(new Skeleton())
         
     );
 
     private static final List<Entity> BOSSES = List.of(
         
         // 0
-        new Duck(),
-        new Duck(),
-        new Duck(),
-        new Duck(),
-        new Duck(),
-        new Duck(),
-        new Duck(),
-        new Duck(),
-        new Duck(),
-
+        new CursedKing(),
+        new PurpleDragon(),
+        new GreenDragon(),
+        new RedDragon(),
+        new BlueDragon(),
+        new RedKnight(),
+        new Imp(),
+        new TreeGolem(),
+        new Soldier(),
         // 9
         new Duck()
     );
@@ -73,7 +71,10 @@ public class EnemyParty {
         return enemies;
     }
     public static Entity getBoss(int round) {
-        return BOSSES.get(round / 10);
+
+        Enemy boss = (Enemy) BOSSES.get(round / 10);
+
+        return boss.createCopy();
     }
 
 }

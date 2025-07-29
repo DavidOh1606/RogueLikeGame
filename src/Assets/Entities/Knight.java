@@ -13,7 +13,7 @@ public class Knight extends Hero {
     private static final String FILE = "src/Images/Heros/blueknight.png";
 
     public Knight() {
-        super(FILE, "blueknight", 50, 50, 15, 3, 10, 3);
+        super(FILE, "Knight", 150, 150, 80, 3, 50, 3);
         setDescription("""
                 <html> 
                 Strong hero with high health, defense, and damage. <br>
@@ -22,10 +22,14 @@ public class Knight extends Hero {
                 """);
 
         List<LevelUpChoice> levelUpChoices = getLevelUpChoices();
-        levelUpChoices.add(new LevelUpHealth(15));
-        levelUpChoices.add(new LevelUpDefense(5));
-        levelUpChoices.add(new LevelUpAttack(10));
-        levelUpChoices.add(new LevelUpSpeed(3));
+        levelUpChoices.add(new LevelUpHealth(40));
+        levelUpChoices.add(new LevelUpDefense(20));
+        levelUpChoices.add(new LevelUpAttack(30));
+        levelUpChoices.add(new LevelUpSpeed(5));
+    }
+
+    public Entity createCopy() {
+        return new Knight();
     }
 
 }

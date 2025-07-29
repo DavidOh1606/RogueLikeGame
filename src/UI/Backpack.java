@@ -5,6 +5,7 @@ import javax.swing.*;
 import Screen.*;
 
 public class Backpack extends GameButton {
+
     private static final String FILE = "src/Images/UI/backpack.png";
 
     private Inventory inventory;
@@ -31,6 +32,7 @@ public class Backpack extends GameButton {
         GameCard card = GameCard.getGameCard();
 
         card.setFocused(true);
+        card.resetItemSelection();
 
         JPanel centerPanel = card.getCenterPanel();
 

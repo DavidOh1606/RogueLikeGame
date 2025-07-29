@@ -52,6 +52,11 @@ public class Hero extends Entity {
             heroStats.put(stat, heroStats.get(stat) - itemStats.get(stat));
         }
 
+        // make sure health is not below 1
+        if (heroStats.get("health") < 1) {
+            heroStats.put("health", 1);
+        }
+
     }
 
     public List<ItemSlot> getItemSlots() {
@@ -71,6 +76,10 @@ public class Hero extends Entity {
 
     public List<LevelUpChoice> getLevelUpChoices() {
         return levelUpChoices;
+    }
+
+    public Entity createCopy() {
+        throw new IllegalStateException("Hero createCopy method should be overridden");
     }
 
 }

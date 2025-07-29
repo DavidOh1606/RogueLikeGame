@@ -35,10 +35,8 @@ public class Battle extends GameCard {
 
     public Battle(List<Entity> enemies) {
 
+        setCanManageInventory(false);
         List<Entity> heros = GameData.getGameData().heros;
-        
-
-
         
         JPanel background = getBg();
         background.setLayout(new BoxLayout(background, BoxLayout.X_AXIS));

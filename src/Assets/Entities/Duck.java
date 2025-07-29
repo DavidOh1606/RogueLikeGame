@@ -7,7 +7,7 @@ public class Duck extends Enemy {
     private static final String FILE = "src/Images/Enemies/duck.png";
 
     public Duck() {
-        super(FILE, "Duck", 50, 50, 20, 3, 3, 5);
+        super(FILE, "Duck", 70, 70, 15, 3, 3, 5);
         addMove(new Quack());
     }
 

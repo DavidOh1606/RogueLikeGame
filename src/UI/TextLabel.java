@@ -20,7 +20,8 @@ public class TextLabel extends JLabel {
         "TITLE", 44,
         "DEFAULT", 14,
         "DAMAGE", 30,
-        "ROUND", 24
+        "ROUND", 24,
+        "BAR", 11
     );
 
 
@@ -29,10 +30,13 @@ public class TextLabel extends JLabel {
     private String fontType;
     private String fontSize;
 
+    private boolean remove;
+
     public TextLabel() {
         fontType = "DEFAULT";
         fontSize = "DEFAULT";
         textLabels.add(this);
+        remove = true;
         resetFont();
     }
 
@@ -70,8 +74,18 @@ public class TextLabel extends JLabel {
         }
     }
 
+    public void setRemove(boolean remove) {
+        this.remove = remove;
+    }
+
     public static void clearTextLabels() {
-        textLabels.clear();
+
+        for (int i = 0; i < textLabels.size(); i++) {
+            if (textLabels.get(i).remove) {
+                textLabels.remove(textLabels.get(i));
+                i--;
+            }
+        }
     }
 
 }

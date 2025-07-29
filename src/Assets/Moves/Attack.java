@@ -68,6 +68,7 @@ public class Attack extends Move {
         }
     }
 
+
     public void resetOptions() {
         for (Entity enemy : Battle.getEnemies()) {
             enemy.removeTarget();

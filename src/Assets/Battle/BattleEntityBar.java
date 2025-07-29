@@ -16,6 +16,8 @@ public class BattleEntityBar extends Sprite {
         super(FILE);
 
         textLabel = new TextLabel();
+        textLabel.setFontSize("BAR");
+        textLabel.setRemove(false);
         draw = false;
 
         add(textLabel);

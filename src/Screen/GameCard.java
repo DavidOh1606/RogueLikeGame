@@ -25,7 +25,7 @@ public class GameCard extends Card {
     private Backpack backpack;
 
     public GameCard() {
-        
+        canManageInventory = true;
     }   
 
     public void initialize() {
@@ -71,7 +71,6 @@ public class GameCard extends Card {
 
         menuLayer.add(centerPanel);
 
-        canManageInventory = true;
     }
 
     public void setButtonSelection(Selectable selection) {

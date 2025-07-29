@@ -7,10 +7,13 @@ import java.util.*;
 
 import Assets.Entities.*;
 import Assets.Battle.*;
+import Assets.Items.*;
 
 import Screen.*;
 
 public class GameData {
+
+    private static final int MAX_NUM_HEROS = 4;
 
     private static final int LEVEL_UP_EVERY = 5;
 
@@ -20,7 +23,7 @@ public class GameData {
     // teammate and fully heal all heros along with resetting move uses
     private static final int BOSS_EVERY = 10;
 
-    private static final int ROUNDS = 100;
+    private static final int ROUNDS = 10;
 
     private static final int NEW_ROUND_DELAY = 200;
 
@@ -29,11 +32,13 @@ public class GameData {
     public List<Entity> heros;
     public Entity main;
     public int round;
+    public InventorySpace inventorySpace;
 
     private GameData() {
         heros = new ArrayList<>();
         main = null;
         round = ROUNDS;
+        inventorySpace = new InventorySpace();
     }
 
     public void newRound() {
@@ -50,16 +55,41 @@ public class GameData {
     }
 
     private void newRoundAction() {
-        if (round % BOSS_EVERY == 0 && round != 100) {
+        if (round == 0) {
+            Screen.switchCard(new WinCard());
+            return;
+        }
+
+
+        if (round % BOSS_EVERY == 0 && round != ROUNDS) {
             if (Screen.getCard() instanceof Battle) {
+                Screen.switchCard(new GainItemCard());
+                return;
+            }
+
+            else if (Screen.getCard() instanceof GainItemCard) {
+                if (heros.size() == MAX_NUM_HEROS) {
+                    Screen.switchCard(new LevelUpCard());
+                    return;
+                }
+                
+                Screen.switchCard(new GainHeroCard());
+                return;
+            }
+
+            else if (Screen.getCard() instanceof GainHeroCard) {
+                Screen.switchCard(new LevelUpCard());
+                return;
+            }
+
+            else if (Screen.getCard() instanceof LevelUpCard) {
                 Screen.switchCard(new RestCard());
                 return;
             }
 
-            
         }
 
-        else if (round % LEVEL_UP_EVERY == 0 && round != 100) {
+        else if (round % LEVEL_UP_EVERY == 0 && round != ROUNDS) {
             if (Screen.getCard() instanceof LevelUpCard) {
                 newBattle();
                 return;

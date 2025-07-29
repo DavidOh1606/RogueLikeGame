@@ -166,7 +166,13 @@ public class Entity extends Sprite implements MouseListener, Selectable {
         }
 
         if (stats.get("health") <= 0) {
+
             Battle.removeEntity(this);
+        }
+
+
+        if (this instanceof Hero) {
+            GameCard.getGameCard().getInventory().resetTextLabels();
         }
 
     }

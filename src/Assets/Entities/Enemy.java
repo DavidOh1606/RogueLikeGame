@@ -11,6 +11,7 @@ import java.util.*;
 
 public class Enemy extends Entity {
 
+    private static final int RANDOM_FACTOR = 40;
 
     private EnemyPlayer enemyPlayer;
 
@@ -76,14 +77,19 @@ public class Enemy extends Entity {
         Move move = enemyMove.move;
 
         if (move instanceof Attack) {
+            Attack attack = (Attack) move;
+            Map<String, Integer> userStats = user.getStats();
             Map<String, Integer> targetStats = target.getStats();
+            
+            value += userStats.get(attack.getTypeUsed());
 
-            value -= targetStats.get("defense") / 4;
-            value += targetStats.get("attack") / 4;
-            value += targetStats.get("magic") / 4;
-            value += targetStats.get("speed") / 6;
+            if (targetStats.containsKey(attack.getTypeDefense())) {
+                value -= targetStats.get(attack.getTypeDefense());
+            }
 
         }
+
+        value += (int) (Math.random() * RANDOM_FACTOR);
 
         enemyMove.setValue(value);
     }

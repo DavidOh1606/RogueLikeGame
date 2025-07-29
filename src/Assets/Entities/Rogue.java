@@ -18,7 +18,8 @@ public class Rogue extends Hero {
     private static final String FILE = "src/Images/Heros/rogue.png";
 
     public Rogue() {
-        super(FILE, "rogue", 50, 50, 18, 5, 2, 15);
+        super(FILE, "Rogue", 10000, 10000, 7000, 1000, 1000, 2000);
+        //super(FILE, "Rogue", 100, 100, 70, 10, 10, 20);
         addMove(new DoubleAttack());
         setDescription("""
                 <html>
@@ -27,9 +28,13 @@ public class Rogue extends Hero {
                 """);
 
         List<LevelUpChoice> levelUpChoices = getLevelUpChoices();
-        levelUpChoices.add(new LevelUpHealth(5));
-        levelUpChoices.add(new LevelUpDefense(2));
-        levelUpChoices.add(new LevelUpAttack(15));
+        levelUpChoices.add(new LevelUpHealth(20));
+        levelUpChoices.add(new LevelUpDefense(10));
+        levelUpChoices.add(new LevelUpAttack(30));
         levelUpChoices.add(new LevelUpSpeed(8));
+    }
+
+    public Entity createCopy() {
+        return new Rogue();
     }
 }

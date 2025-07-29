@@ -27,6 +27,7 @@ public class ItemSlot extends Sprite implements MouseListener {
         c = new GridBagConstraints();
         c.anchor = GridBagConstraints.CENTER;
 
+        setRemove(false);
         addMouseListener(this);
     }
 

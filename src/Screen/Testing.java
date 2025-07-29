@@ -15,7 +15,7 @@ import UI.*;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Testing extends RestCard {
+public class Testing extends GameOver {
     
     public Testing() {
         

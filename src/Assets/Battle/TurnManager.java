@@ -26,13 +26,14 @@ public class TurnManager {
     }
 
     public static void changeTurn() {
+
+        turns.get(turns.size() - 1).setBarDraw(false);
+        turns.get(turns.size() - 1).setSelectable(false);
         if (checkWin()) {
             return;
         }
         Entity currentTurn = turns.remove(0);
         currentTurn.setBarDraw(true);
-        turns.get(turns.size() - 1).setBarDraw(false);
-        turns.get(turns.size() - 1).setSelectable(false);
         turns.add(currentTurn);
         currentTurn.setSelectable(true);
 
@@ -73,25 +74,14 @@ public class TurnManager {
     }
 
     public static boolean checkWin() {
-        if (Battle.getHeros().isEmpty()) {
-            Screen.switchCard(new Menu());
+        if (!Battle.getHeros().contains(GameData.getGameData().main)) {
+            Screen.getCard().mousePressed(null);
+            Screen.switchCard(new GameOver());
             return true;
         }
 
         else if (Battle.getEnemies().isEmpty()) {
-
-
-            /* 
-            List<Entity> enemies = new ArrayList<>();
-            enemies.add(new Skeleton());
-            enemies.add(new Skeleton());
-
-            if (round )
-
-
-            Screen.switchCard(new Battle(enemies));*/
             GameData.getGameData().newRound();
-
             return true;
         }
 
@@ -100,6 +90,10 @@ public class TurnManager {
 
     public static void removeEntity(Entity entity) {
         turns.remove(entity);
+
+        if (entity instanceof Hero) {
+            GameData.getGameData().heros.remove(entity);
+        }
     }
 
     public static boolean isEnemyTurn() {

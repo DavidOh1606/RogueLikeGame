@@ -25,7 +25,7 @@ public class ItemManager {
         List<Item> possibleItems = ITEMS.get(round / 10);
 
         if (possibleItems.isEmpty()) {
-            throw new IllegalStateException("No possible items to give");
+            return new RingMagic();
         }
 
         return possibleItems.get((int) (Math.random() * possibleItems.size()));

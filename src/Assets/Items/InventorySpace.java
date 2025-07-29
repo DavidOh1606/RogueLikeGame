@@ -22,6 +22,7 @@ public class InventorySpace extends Sprite {
         rows = 4;
         columns = 2;
 
+        setRemove(false);
         setLayout(new GridBagLayout());
         c = new GridBagConstraints();
         c.anchor = GridBagConstraints.CENTER;

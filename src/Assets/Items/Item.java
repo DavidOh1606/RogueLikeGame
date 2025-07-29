@@ -120,7 +120,7 @@ public class Item extends Sprite implements MouseListener, Selectable {
         if (!super.gameInteractable()) {
             return false;
         }
-
+ 
         if (!selectable || !GameCard.getGameCard().canManageInventory() 
                 || GameCard.getGameCard().getItemSelection() == this) {
             return false;

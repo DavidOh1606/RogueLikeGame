@@ -4,7 +4,7 @@ public class Skeleton extends Enemy {
     private static final String FILE = "src/Images/Enemies/skeleton.png";
 
     public Skeleton() {
-        super(FILE, "Skeleton", 10, 10, 8, 6, 4, 6);
+        super(FILE, "Skeleton", 50, 50, 23, 10, 10, 6);
 
     }
 

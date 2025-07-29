@@ -18,7 +18,7 @@ public class Ranger extends Hero {
     private static final String FILE = "src/Images/Heros/ranger.png";
 
     public Ranger() {
-        super(FILE, "ranger", 50, 50, 15, 5, 5, 15);
+        super(FILE, "Ranger", 150, 150, 30, 5, 15, 50);
         addMove(new Arrow());
         setDescription("""
                 <html>
@@ -29,9 +29,13 @@ public class Ranger extends Hero {
 
     
         List<LevelUpChoice> levelUpChoices = getLevelUpChoices();
-        levelUpChoices.add(new LevelUpHealth(10));
-        levelUpChoices.add(new LevelUpDefense(3));
-        levelUpChoices.add(new LevelUpAttack(10));
-        levelUpChoices.add(new LevelUpSpeed(15));
+        levelUpChoices.add(new LevelUpHealth(20));
+        levelUpChoices.add(new LevelUpDefense(10));
+        levelUpChoices.add(new LevelUpAttack(15));
+        levelUpChoices.add(new LevelUpSpeed(20));
+    }
+
+    public Entity createCopy() {
+        return new Ranger();
     }
 }

@@ -17,11 +17,14 @@ import java.util.ArrayList;
 public class Inventory extends Sprite implements MouseListener {
     private static final String FILE = "src/Images/UI/inventory.png";
 
+
+    private List<Hero> heros;
     private List<JPanel> entityPanels;
     private List<TextLabel> textLabels;
 
     public Inventory() {
         super(FILE);
+
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
         GameData gameData = GameData.getGameData();
@@ -44,9 +47,11 @@ public class Inventory extends Sprite implements MouseListener {
 
         entityPanels = new ArrayList<>();
         textLabels = new ArrayList<>();
+        heros = new ArrayList<>();
 
         for (Entity entity : gameData.heros) {
             Hero hero = (Hero) entity;
+            heros.add(hero);
             JPanel entityPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
             entityPanel.setOpaque(false);
             TextLabel entityLabel = new TextLabel();
@@ -68,7 +73,8 @@ public class Inventory extends Sprite implements MouseListener {
 
         }
 
-        rightPanel.add(new InventorySpace());
+
+        rightPanel.add(GameData.getGameData().inventorySpace);
 
         panel.add(leftPanel);
         panelRight.add(rightPanel);
@@ -79,13 +85,11 @@ public class Inventory extends Sprite implements MouseListener {
         repaint();
 
         addMouseListener(this);
-
     }
-
 
     public void resetTextLabels() {
         for (int i = 0; i < textLabels.size(); i++) {
-            textLabels.get(i).setText(GameData.getGameData().heros.get(i).toString());
+            textLabels.get(i).setText(heros.get(i).toString());
         }
     }
 
