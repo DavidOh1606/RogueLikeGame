@@ -10,6 +10,6 @@ public class RingSpeed extends Item {
 
         Map<String, Integer> stats = getStats();
         
-        stats.put("speed", 10);
+        stats.put("speed", 20);
     }
 }

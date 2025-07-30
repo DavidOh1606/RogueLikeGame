@@ -48,7 +48,7 @@ public class Sprite extends JPanel {
 
     public void setImage(String file) {
         try {
-            setImage(ImageIO.read(new File(file)));
+            setImage(ImageIO.read(getClass().getClassLoader().getResourceAsStream(file.substring(4))));
         }
 
         catch (IOException e) {

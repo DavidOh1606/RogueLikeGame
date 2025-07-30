@@ -16,6 +16,8 @@ import javax.swing.Timer;
 import Screen.*;
 import UI.*;
 
+import Sound.Sound;
+
 public class Entity extends Sprite implements MouseListener, Selectable {
 
     private String name;
@@ -144,6 +146,9 @@ public class Entity extends Sprite implements MouseListener, Selectable {
 
     public void assignDamage(int damage, String usedModifier) {
 
+        Sound sound = new Sound("damage");
+        sound.playSound();
+
         int actualDamage;
 
         if (usedModifier.equals("")) {
@@ -166,7 +171,8 @@ public class Entity extends Sprite implements MouseListener, Selectable {
         }
 
         if (stats.get("health") <= 0) {
-
+            setRemove(true);
+            bar.setRemove(true);
             Battle.removeEntity(this);
         }
 

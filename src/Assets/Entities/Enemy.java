@@ -11,7 +11,7 @@ import java.util.*;
 
 public class Enemy extends Entity {
 
-    private static final int RANDOM_FACTOR = 40;
+    private static final int RANDOM_FACTOR = 60;
 
     private EnemyPlayer enemyPlayer;
 

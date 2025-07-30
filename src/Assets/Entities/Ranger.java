@@ -7,6 +7,9 @@ import Assets.LevelUp.LevelUpChoice;
 import Assets.LevelUp.LevelUpDefense;
 import Assets.LevelUp.LevelUpHealth;
 import Assets.LevelUp.LevelUpSpeed;
+import Assets.LevelUp.MagicLevelUp;
+import Assets.LevelUp.SpeedLevelUp;
+import Assets.LevelUp.StrengthLevelUp;
 import Assets.Moves.*;
 
 // Starts with high attack and and medium defense
@@ -18,7 +21,7 @@ public class Ranger extends Hero {
     private static final String FILE = "src/Images/Heros/ranger.png";
 
     public Ranger() {
-        super(FILE, "Ranger", 150, 150, 30, 5, 15, 50);
+        super(FILE, "Ranger", 20, 20, 15, 10, 10, 20);
         addMove(new Arrow());
         setDescription("""
                 <html>
@@ -29,10 +32,9 @@ public class Ranger extends Hero {
 
     
         List<LevelUpChoice> levelUpChoices = getLevelUpChoices();
-        levelUpChoices.add(new LevelUpHealth(20));
-        levelUpChoices.add(new LevelUpDefense(10));
-        levelUpChoices.add(new LevelUpAttack(15));
-        levelUpChoices.add(new LevelUpSpeed(20));
+        levelUpChoices.add(new StrengthLevelUp(10, 10, 5));
+        levelUpChoices.add(new SpeedLevelUp(15, 2, 15));
+        levelUpChoices.add(new MagicLevelUp(5));
     }
 
     public Entity createCopy() {

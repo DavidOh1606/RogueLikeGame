@@ -10,7 +10,7 @@ public class RingPower extends Item {
         
         Map<String, Integer> stats = getStats();
 
-        stats.put("attack", 10);
+        stats.put("attack", 30);
     }
 
 

@@ -35,5 +35,7 @@ public class GainItemCard extends GameCard {
 
         background.add(itemPanel);
         background.add(buttonPanel);
+
+        setKeepPlaying(true);
     }
 }

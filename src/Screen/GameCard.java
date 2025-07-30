@@ -30,6 +30,7 @@ public class GameCard extends Card {
 
     public void initialize() {
         super.initialize();
+
         itemSelection = null;
         buttonSelection = null;
 
@@ -61,7 +62,7 @@ public class GameCard extends Card {
 
         TextLabel roundText = new TextLabel("" + GameData.getGameData().round);
         roundText.setFontSize("ROUND");
-        roundText.setForeground(Color.yellow);
+        roundText.setForeground(Color.black);
 
         roundPanel.add(roundText);
 
@@ -149,7 +150,7 @@ public class GameCard extends Card {
         Card card = Screen.getCard();
 
         if (!(card instanceof GameCard)) {
-            throw new IllegalStateException("Card is not a gamecard");
+            return null;
         }
 
         return (GameCard) card;

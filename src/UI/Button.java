@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 import Assets.Sprite;
+import Sound.Sound;
 
 public abstract class Button extends Sprite implements MouseListener{
     private static final String FILE = "src/Images/UI/button.png";
@@ -28,6 +29,8 @@ public abstract class Button extends Sprite implements MouseListener{
     public abstract void action();
 
     public void mousePressed(MouseEvent e) {
+        Sound sound = new Sound("button");
+        sound.playSound();
         action();
     }
 

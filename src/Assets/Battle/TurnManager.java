@@ -27,8 +27,7 @@ public class TurnManager {
 
     public static void changeTurn() {
 
-        turns.get(turns.size() - 1).setBarDraw(false);
-        turns.get(turns.size() - 1).setSelectable(false);
+        resetLastTurn();
         if (checkWin()) {
             return;
         }
@@ -74,6 +73,8 @@ public class TurnManager {
     }
 
     public static boolean checkWin() {
+
+
         if (!Battle.getHeros().contains(GameData.getGameData().main)) {
             Screen.getCard().mousePressed(null);
             Screen.switchCard(new GameOver());
@@ -86,6 +87,12 @@ public class TurnManager {
         }
 
         return false;
+    }
+
+    public static void resetLastTurn() {
+        turns.get(turns.size() - 1).setBarDraw(false);
+        turns.get(turns.size() - 1).setSelectable(false);
+        turns.get(turns.size() - 1).setAlpha(1.0f);
     }
 
     public static void removeEntity(Entity entity) {

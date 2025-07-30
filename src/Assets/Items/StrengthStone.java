@@ -10,7 +10,7 @@ public class StrengthStone extends Item {
         super(FILE, "Strength Stone");
         Map<String, Integer> stats = getStats();
 
-        stats.put("attack", 100);
-        stats.put("defense", 100);
+        stats.put("attack", 30);
+        stats.put("defense", 30);
     }
 }

@@ -15,10 +15,14 @@ public class LevelUpCard extends GameCard {
     private static final int HERO_VGAP = 40;
     private static final int HORIZONTAL_GAP = 200;
 
-    public LevelUpCard() {
+    private int index;
+
+    public LevelUpCard(int index) {
+        this.index = index;
+
         JPanel background = getBg();
 
-        Hero mainHero = (Hero) GameData.getGameData().main;
+        Hero mainHero = (Hero) GameData.getGameData().heros.get(index);
 
         if (mainHero == null) {
             throw new IllegalStateException("Main hero is not set");
@@ -34,13 +38,13 @@ public class LevelUpCard extends GameCard {
         JPanel rightCenter = new JPanel();
         rightCenter.setOpaque(false);
 
-        rightCenter.add(mainHero.spriteCopy());
+        rightCenter.add(mainHero);
         
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
 
         rightPanel.add(rightCenter);
         rightPanel.add(Box.createRigidArea(new Dimension(0, HERO_VGAP)));
-        rightPanel.add(new ConfirmLevelUp());
+        rightPanel.add(new ConfirmLevelUp(mainHero));
 
 
 
@@ -64,6 +68,8 @@ public class LevelUpCard extends GameCard {
         background.add(Box.createRigidArea(new Dimension(0, VERTICAL_GAP)));
         background.add(center);
 
+        setKeepPlaying(true);
+
     }
 
     public void setSelection(Selectable selection) {
@@ -84,5 +90,9 @@ public class LevelUpCard extends GameCard {
         levelUpChoice.setSelected(false);
 
 
+    }
+
+    public int getHeroIndex() {
+        return index;
     }
 }

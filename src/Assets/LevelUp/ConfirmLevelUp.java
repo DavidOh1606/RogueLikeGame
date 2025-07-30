@@ -8,26 +8,24 @@ import UI.*;
 
 public class ConfirmLevelUp extends Button {
     
-    public ConfirmLevelUp() {
+    private Hero hero;
+
+    public ConfirmLevelUp(Hero hero) {
         super("Confirm");
+
+        this.hero = hero;
     }
 
     public void action() {
 
         Selectable selection = Screen.getCard().getSelection();
 
-        Hero mainHero = (Hero) GameData.getGameData().main;
-
-        if (mainHero == null) {
-            throw new IllegalStateException("Main hero is not set");
-        }
-
         if (!(selection instanceof LevelUpChoice)) {
             return;
         }
 
         LevelUpChoice choice = (LevelUpChoice) selection;
-        mainHero.levelUp(choice);
+        hero.levelUp(choice);
 
         Screen.getCard().resetSelection();
         GameData.getGameData().newRound();

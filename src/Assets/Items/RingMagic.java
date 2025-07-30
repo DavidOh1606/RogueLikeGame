@@ -10,6 +10,6 @@ public class RingMagic extends Item {
 
         Map<String, Integer> stats = getStats();
 
-        stats.put("magic", 10);
+        stats.put("magic", 20);
     }
 }

@@ -5,7 +5,7 @@ public class PurpleDragon extends Enemy {
     private static final String FILE = "src/Images/Enemies/purpledragon.png";
 
     public PurpleDragon() {
-        super(FILE, "Purple Dragon", 1800, 1800, 250, 100, 120, 10);
+        super(FILE, "Purple Dragon", 1500, 1500, 180, 100, 140, 80);
     }
 
     public Entity createCopy() {

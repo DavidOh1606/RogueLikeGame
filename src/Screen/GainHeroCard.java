@@ -39,7 +39,7 @@ public class GainHeroCard extends GameCard {
 
         heroPanel.add(newHero);
 
-        buttonPanel.add(new NoHeroChoice());
+        buttonPanel.add(new NoHeroChoice(newHero));
         buttonPanel.add(Box.createRigidArea(new Dimension(BUTTON_GAP, 0)));
         buttonPanel.add(new YesHeroChoice(newHero));
 
@@ -50,7 +50,7 @@ public class GainHeroCard extends GameCard {
         background.add(buttonPanel);
 
 
-
+        setKeepPlaying(true);
 
         
     }

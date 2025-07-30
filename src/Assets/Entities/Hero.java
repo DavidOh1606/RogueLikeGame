@@ -82,4 +82,15 @@ public class Hero extends Entity {
         throw new IllegalStateException("Hero createCopy method should be overridden");
     }
 
+    public void setRemove(boolean remove) {
+        super.setRemove(remove);
+        if (!remove) {
+            return;
+        }
+
+        for (ItemSlot itemSlot : itemSlots) {
+            itemSlot.setRemove(remove);
+        }
+    }
+
 }

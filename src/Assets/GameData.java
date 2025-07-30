@@ -23,7 +23,7 @@ public class GameData {
     // teammate and fully heal all heros along with resetting move uses
     private static final int BOSS_EVERY = 10;
 
-    private static final int ROUNDS = 10;
+    private static final int ROUNDS = 100;
 
     private static final int NEW_ROUND_DELAY = 200;
 
@@ -60,6 +60,15 @@ public class GameData {
             return;
         }
 
+        if (Screen.getCard() instanceof LevelUpCard) {
+            LevelUpCard levelUpCard = (LevelUpCard) Screen.getCard();
+
+            if (levelUpCard.getHeroIndex() < heros.size() - 1) {
+                Screen.switchCard(new LevelUpCard(levelUpCard.getHeroIndex() + 1));
+                return;
+            }
+        }
+
 
         if (round % BOSS_EVERY == 0 && round != ROUNDS) {
             if (Screen.getCard() instanceof Battle) {
@@ -69,7 +78,7 @@ public class GameData {
 
             else if (Screen.getCard() instanceof GainItemCard) {
                 if (heros.size() == MAX_NUM_HEROS) {
-                    Screen.switchCard(new LevelUpCard());
+                    Screen.switchCard(new LevelUpCard(0));
                     return;
                 }
                 
@@ -78,7 +87,7 @@ public class GameData {
             }
 
             else if (Screen.getCard() instanceof GainHeroCard) {
-                Screen.switchCard(new LevelUpCard());
+                Screen.switchCard(new LevelUpCard(0));
                 return;
             }
 
@@ -117,7 +126,7 @@ public class GameData {
         }
 
         else if (round % LEVEL_UP_EVERY == 0) {
-            Screen.switchCard(new LevelUpCard());
+            Screen.switchCard(new LevelUpCard(0));
         }
 
         else if (round % ITEM_EVERY == 0) { 

@@ -6,12 +6,15 @@ import javax.swing.*;
 
 import UI.*;
 
+import Sound.Sound;
+
 public class Menu extends Card {
 
     private static final int TITLE_FONT_SIZE = 44;
     private static final String TITLE_FONT = "Arial";
 
     public Menu() {
+
         JPanel background = getBg();
 
         JPanel panel = new JPanel();
@@ -40,8 +43,10 @@ public class Menu extends Card {
         buttonPanel.add(new Play());
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
+        /* 
         buttonPanel.add(new LoadGame());
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        */
 
         buttonPanel.add(new Quit());
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -49,6 +54,12 @@ public class Menu extends Card {
         panel.add(Box.createRigidArea(new Dimension(0, 20)));
         panel.add(titlePanel);
         panel.add(buttonPanel);
+
+    }
+
+    public void initialize() {
+
+        playMusic("canon");
     }
 
 }

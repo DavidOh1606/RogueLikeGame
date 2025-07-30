@@ -9,7 +9,7 @@ public class LifeStone extends Item {
         super(FILE, "Life Stone");
 
         Map<String, Integer> stats = getStats();
-        stats.put("health", 200);
-        stats.put("maxHealth", 200);
+        stats.put("health", 50);
+        stats.put("maxHealth", 50);
     }
 }

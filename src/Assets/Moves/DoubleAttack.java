@@ -60,6 +60,7 @@ public class DoubleAttack extends Attack {
                     if (TurnManager.checkWin()) {
                         Move.moveLocked = false;
                         attackedOnce = false;
+                        TurnManager.resetLastTurn();
                         reduceUses();
                     }
                 }

@@ -14,7 +14,7 @@ public class Wizard extends Hero {
     private static final String FILE = "src/Images/Heros/wizard.png";
 
     public Wizard() {
-        super(FILE, "Wizard", 100, 100, 12, 50, 10, 10);
+        super(FILE, "Wizard", 20, 20, 10, 30, 10, 10);
         addMove(new MagicAttack());
         setDescription("""
                 <html>
@@ -24,10 +24,9 @@ public class Wizard extends Hero {
                 """);
 
         List<LevelUpChoice> levelUpChoices = getLevelUpChoices();
-        levelUpChoices.add(new LevelUpHealth(20));
-        levelUpChoices.add(new LevelUpDefense(10));
-        levelUpChoices.add(new LevelUpMagic(40));
-        levelUpChoices.add(new LevelUpSpeed(5));
+        levelUpChoices.add(new StrengthLevelUp(5, 10, 5));
+        levelUpChoices.add(new SpeedLevelUp(5, 2, 5));
+        levelUpChoices.add(new WizardLevelUp(15, 2, 5));
     }
 
     public Entity createCopy() {

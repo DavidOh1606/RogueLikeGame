@@ -12,6 +12,7 @@ public class ToMenu extends Button {
 
     public void action() {
         GameData.resetGameData();
+        Screen.getCard().setKeepPlaying(false);
         Screen.switchCard(new Menu());
     }
 

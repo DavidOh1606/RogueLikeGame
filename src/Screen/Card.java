@@ -7,6 +7,7 @@ import javax.swing.*;
 import Assets.*;
 import UI.*;
 
+import Sound.Sound;
 
 public class Card extends JPanel implements MouseListener{
 
@@ -30,6 +31,8 @@ public class Card extends JPanel implements MouseListener{
     private JPanel toolTipLayer;
     private ToolTip toolTip;
 
+    private Sound music;
+    private boolean keepPlaying;
 
     public Card() {
         Sprite.clearSprites();
@@ -42,7 +45,8 @@ public class Card extends JPanel implements MouseListener{
         setOpaque(false);
         setLayout(null);
 
-
+        music = null;
+        keepPlaying = false;
 
         // Setting up the layers
         layers = new JLayeredPane();
@@ -190,4 +194,39 @@ public class Card extends JPanel implements MouseListener{
 
         return true;
     }   
+
+
+    public void playMusic(String name) {
+
+        if (music != null) {
+            music.stopSound();
+        }
+
+        music = new Sound(name);
+        music.playSound(true);
+    }
+
+    public void setMusic(Sound sound) {
+        music = sound;
+    }
+
+    public Sound getMusic() {
+        return music;
+    }
+
+    public void setKeepPlaying(boolean keepPlaying) {
+        this.keepPlaying = keepPlaying;
+    }
+
+    public boolean getKeepPlaying() {
+        return keepPlaying;
+    }
+
+    public void stopMusic() {
+        if (music == null) {
+            return;
+        }
+
+        music.stopSound();
+    }
 }

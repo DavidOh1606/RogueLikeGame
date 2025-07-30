@@ -62,4 +62,8 @@ public class HeroChoice extends GameCard {
         background.add(panel);
 
     }
+
+    public void initialize() {
+        playMusic("lullaby");
+    }
 }

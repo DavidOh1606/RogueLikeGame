@@ -136,6 +136,12 @@ public class Battle extends GameCard {
 
     public void initialize() {
         super.initialize();
+        if (getMusic() == null) {
+            playMusic("battle");
+        }
+
+        setKeepPlaying(true);
+
         TurnManager.init(heroEntities.getEntities(), enemyEntities.getEntities());
     }
 

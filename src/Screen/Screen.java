@@ -24,7 +24,6 @@ public class Screen extends JFrame implements KeyListener, ComponentListener {
 
     private static Screen screen = new Screen();
 
-    private static CardLayout cardLayout;
     private static JPanel cards;
     private static Card card;
 
@@ -41,8 +40,7 @@ public class Screen extends JFrame implements KeyListener, ComponentListener {
         addComponentListener(this);
 
         cards = new JPanel();
-        cardLayout = new CardLayout();
-        cards.setLayout(cardLayout);
+        cards.setLayout(new CardLayout());
         add(cards);
         card = new Menu();
         //card = new Testing();
@@ -71,10 +69,21 @@ public class Screen extends JFrame implements KeyListener, ComponentListener {
     }
 
     public static void switchCard(Card card) {
+        cards.remove(Screen.card);
+
+        if (Screen.card.getKeepPlaying()) {
+            card.setMusic(Screen.card.getMusic());
+        }
+
+        else {
+            Screen.card.stopMusic();
+        }
+
         Screen.card = card;
-        cards.add(card, "");
-        cardLayout.show(cards, "");
+        cards.add(card);
         card.initialize();
+        cards.revalidate();
+        cards.repaint();
     }
 
     public static Card getCard() {

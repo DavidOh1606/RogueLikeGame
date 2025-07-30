@@ -5,7 +5,7 @@ public class Imp extends Enemy {
     private static final String FILE = "src/Images/Enemies/imp.png";
 
     public Imp() {
-        super(FILE, "Imp", 300, 300, 100, 100, 90, 60);
+        super(FILE, "Imp", 350, 350, 100, 100, 80, 40);
     }
 
     public Entity createCopy() {

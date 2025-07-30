@@ -6,7 +6,7 @@ public class BlueDragon extends Enemy {
     private static final String FILE = "src/Images/Enemies/bluedragon.png";
 
     public BlueDragon() {
-        super(FILE, "Blue Dragon", 600, 600, 150, 140, 120, 40);
+        super(FILE, "Blue Dragon", 500, 500, 100, 100, 50, 35);
         addMove(new EnemyMagicAttack());
     }
 

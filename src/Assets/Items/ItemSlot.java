@@ -99,6 +99,10 @@ public class ItemSlot extends Sprite implements MouseListener {
         }
 
         else {
+            if (item != null) {
+                return;
+            }
+
             itemParent.remove(newItem);
             itemParent.revalidate();
             itemParent.repaint();
@@ -150,5 +154,15 @@ public class ItemSlot extends Sprite implements MouseListener {
 
 
         return true;
+    }
+
+    public void setRemove(boolean remove) {
+        super.setRemove(remove);
+
+        if (!remove || item == null) {
+            return;
+        }
+
+        item.setRemove(remove);
     }
 }

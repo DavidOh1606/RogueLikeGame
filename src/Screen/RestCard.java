@@ -52,4 +52,10 @@ public class RestCard extends GameCard {
     }
 
 
+    public void initialize() {
+        playMusic("lullaby");
+
+
+    }
+
 }

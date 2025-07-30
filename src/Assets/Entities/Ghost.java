@@ -7,7 +7,7 @@ public class Ghost extends Enemy {
     private static final String FILE = "src/Images/Enemies/ghost.png";
 
     public Ghost() {
-        super(FILE, "Ghost", 50, 50, 14, 40, 20, 20);
+        super(FILE, "Ghost", 20, 20, 10, 15, 15, 5);
         addMove(new EnemyMagicAttack());
     }
 

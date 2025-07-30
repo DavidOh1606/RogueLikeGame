@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import Sound.Sound;
+
 public abstract class GameButton extends Sprite implements MouseListener, Selectable {
 
 
@@ -31,6 +33,8 @@ public abstract class GameButton extends Sprite implements MouseListener, Select
         if (selected) {
             GameCard game = GameCard.getGameCard();
             game.setButtonSelection(this);
+            Sound sound = new Sound("button");
+            sound.playSound();
             use();
         }
 
@@ -81,6 +85,11 @@ public abstract class GameButton extends Sprite implements MouseListener, Select
     }
 
     public boolean interactable(MouseEvent e) {
+        if (GameCard.getGameCard() == null) {
+            return false;
+        }
+
+
         if (!selectable || GameCard.getGameCard().getButtonSelection() == this
                 || !super.gameInteractable()) {
             return false;

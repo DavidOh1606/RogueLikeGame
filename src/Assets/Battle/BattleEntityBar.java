@@ -42,6 +42,10 @@ public class BattleEntityBar extends Sprite {
         super.paintComponent(g);
     }
 
+    public void setRemove(boolean remove) {
+        super.setRemove(remove);
+        textLabel.setRemove(remove);
+    }
 
 
 }
