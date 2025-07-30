@@ -29,8 +29,7 @@ public abstract class Button extends Sprite implements MouseListener{
     public abstract void action();
 
     public void mousePressed(MouseEvent e) {
-        Sound sound = new Sound("button");
-        sound.playSound();
+        
         action();
     }
 

@@ -1,8 +1,11 @@
 package Screen;
 
 import java.awt.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.*;
 
 import Assets.Sprite;
 import Assets.Entities.Entity;
@@ -14,7 +17,7 @@ import UI.*;
 public class Screen extends JFrame implements KeyListener, ComponentListener {
 
     // Public Constants
-    public static final String TITLE = "RogueLike";
+    public static final String TITLE = "Tenacious Quest";
     public static final int DEFAULT_WIDTH = 1024;
     public static final int DEFAULT_HEIGHT = 768;
 
@@ -33,6 +36,15 @@ public class Screen extends JFrame implements KeyListener, ComponentListener {
         setMinimumSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
         setTitle(TITLE);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        
+        try {
+            setIconImage(ImageIO.read(getClass().getClassLoader().getResourceAsStream("Images/coverImage.png")));
+        }
+        catch (IOException e) {
+            System.out.println("error");
+        }
+
 
 
         setLocationRelativeTo(null);

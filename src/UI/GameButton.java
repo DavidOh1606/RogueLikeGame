@@ -33,8 +33,6 @@ public abstract class GameButton extends Sprite implements MouseListener, Select
         if (selected) {
             GameCard game = GameCard.getGameCard();
             game.setButtonSelection(this);
-            Sound sound = new Sound("button");
-            sound.playSound();
             use();
         }
 

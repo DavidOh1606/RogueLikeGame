@@ -16,7 +16,7 @@ public class Sound {
     private Clip clip;  
     private static final Map<String, URL> SOUNDS = Map.of(
         "battle", Sound.class.getClassLoader().getResource("Sound/battle song.wav"),
-        "button", Sound.class.getClassLoader().getResource("Sound/buttonsound.wav"),
+        //"button", Sound.class.getClassLoader().getResource("Sound/buttonsound.wav"),
         "canon", Sound.class.getClassLoader().getResource("Sound/canon.wav"),
         "damage", Sound.class.getClassLoader().getResource("Sound/damage.wav"),
         "lullaby", Sound.class.getClassLoader().getResource("Sound/lullaby.wav")

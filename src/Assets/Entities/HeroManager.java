@@ -6,8 +6,8 @@ public class HeroManager {
 
     private static final List<List<Hero>> HEROS = List.of(
         List.of(new Steve()),
-        List.of(new Steve()),
-        List.of(new Steve()),
+        List.of(new Steve(), new RedDragonHero(), new BlueDragonHero()),
+        List.of(new Steve(), new BlueDragonHero(), new RedDragonHero()),
         List.of(new Cowboy()),
         List.of(new Cowboy()),
         List.of(new DuckHero()),

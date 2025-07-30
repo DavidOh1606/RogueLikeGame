@@ -40,7 +40,11 @@ public class Menu extends Card {
 
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 80)));
         
-        buttonPanel.add(new Play());
+        JPanel temp = new JPanel();
+        temp.setOpaque(false);
+        temp.add(new Play());
+
+        buttonPanel.add(temp);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
         /* 
@@ -48,7 +52,10 @@ public class Menu extends Card {
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         */
 
-        buttonPanel.add(new Quit());
+        temp = new JPanel();
+        temp.setOpaque(false);
+        temp.add(new Quit());
+        buttonPanel.add(temp);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
         panel.add(Box.createRigidArea(new Dimension(0, 20)));
